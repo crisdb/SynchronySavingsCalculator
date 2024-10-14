@@ -2,7 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="103fc6dc-50d4-46f5-8ef3-4fd9e5fb2cdc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/views/CDView.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/CDView.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/styles/HYSCalculator.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/styles/IncrementDecrement.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/IncrementDecrement.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/styles/HYSView.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/HYSView.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/HYSCalculator.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HYSCalculator.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/HYSFavorable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HYSFavorable.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/HYSView.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/HYSView.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -14,6 +23,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript JSX File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -35,6 +45,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "list.type.of.created.stylesheet": "CSS",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
     "ts.external.directory.path": "C:\\Users\\cbaumgarten\\AppData\\Local\\JetBrains\\WebStorm 2022.1\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external",
@@ -55,7 +66,7 @@
       <option name="presentableId" value="Default" />
       <updated>1728920163044</updated>
       <workItem from="1728920164236" duration="3328000" />
-      <workItem from="1728925800002" duration="5774000" />
+      <workItem from="1728925800002" duration="11032000" />
     </task>
     <servers />
   </component>

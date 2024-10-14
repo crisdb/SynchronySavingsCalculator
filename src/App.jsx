@@ -10,7 +10,7 @@ const App = () => (
     <Routes>
       <Route path="/hys" element={<HYSView />} />
       <Route path="/cd" element={<CDView />} />
-      <Route path="/off-term-cd" element={<OffTermCDView />} />
+      <Route path="/offterm" element={<OffTermCDView />} />
       <Route path="*" element={<Navigate to="/hys" />} />
     </Routes>
   </Router>

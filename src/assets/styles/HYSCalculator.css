@@ -1,0 +1,36 @@
+.hys-calculator {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    background-color: white;
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+}
+
+.increment-decrement {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #073b4c;
+    color: white;
+    padding: 10px;
+    border-radius: 24px;
+    width: 180px;
+}
+
+.summary {
+    margin-top: 24px;
+}
+
+.summary h6 {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.summary p {
+    font-size: 16px;
+    margin: 4px 0;
+}
