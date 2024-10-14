@@ -47,3 +47,19 @@ const HYSView = () => {
 };
 
 export default HYSView;
+
+//
+// // USE THIS TO EMULATE THE CMS AND COMMENT OUT ABOVE
+//
+// import React from 'react';
+// import HYSCalculator from '../components/HYSCalculator';
+//
+// // Simulate the CMS environment locally
+// const HYSView = () => (
+//     <div id="product-hys-rate-component" data-mode="unfavorable">
+//         <h1>HYS Calculator - Development Preview</h1>
+//         <HYSCalculator />
+//     </div>
+// );
+//
+// export default HYSView;

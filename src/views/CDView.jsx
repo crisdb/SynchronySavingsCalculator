@@ -47,3 +47,18 @@ const CDView = () => {
 };
 
 export default CDView;
+
+
+// USE THIS TO EMULATE THE CMS AND COMMENT OUT ABOVE
+// import React from 'react';
+// import CDCalculator from '../components/CDCalculator';
+//
+// // Simulate the CMS environment locally
+// const CDView = () => (
+//     <div id="product-cds-rate-component" data-mode="favorable">
+//         <h1>CD Calculator - Development Preview</h1>
+//         <CDCalculator />
+//     </div>
+// );
+//
+// export default CDView;

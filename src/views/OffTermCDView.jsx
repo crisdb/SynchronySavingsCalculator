@@ -22,3 +22,20 @@ const OffTermCDView = () => {
 };
 
 export default OffTermCDView;
+
+
+
+// USE THIS TO EMULATET THE CMS AND COMMENT OUT ABOVE
+
+// import React from 'react';
+// import OffTermCDCalculator from '../components/OffTermCDCalculator';
+//
+// // Simulate the CMS environment locally
+// const OffTermCDView = () => (
+//     <div id="product-offterm-cd-component">
+//       <h1>Off-Term CD Calculator - Development Preview</h1>
+//       <OffTermCDCalculator />
+//     </div>
+// );
+//
+// export default OffTermCDView;
