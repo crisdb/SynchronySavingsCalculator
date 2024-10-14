@@ -34,7 +34,7 @@ const HYSView = () => {
     // Render the HYSCalculator with the appropriate props
     return (
         <div className="hys-container" style={{ padding: '24px' }}>
-            <h1>HYS Calculator - Full View</h1>
+            <h1>See how much your money can grow.</h1>
             <button
                 onClick={() => setMode((prev) => (prev === 'favorable' ? 'less-favorable' : 'favorable'))}
             >

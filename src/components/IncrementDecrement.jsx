@@ -7,7 +7,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 const StyledBox = styled(Box)({
     display: 'flex',
     alignItems: 'center',
-    backgroundColor: '#073b4c',
+    backgroundColor: '#00344D',
     borderRadius: '24px',
     padding: '5px 10px',
     color: '#fff',
