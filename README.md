@@ -1,3 +1,125 @@
+
+# Synchrony Savings Calculator
+
+This project contains modular React components to render calculators for HYS, CD, and Off-Term CDs. These components are designed to be used in a CMS environment, with built-in support for:
+
+1. **Manual mode switching** via CMS `div` attributes.
+2. **Dynamic switching** between favorable/unfavorable based on API data.
+3. **Mobile and desktop layout handling** automatically within each component.
+
+---
+
+## CMS Integration Instructions
+
+To use the components in your CMS, follow the examples below:
+
+### **1. CD Calculator Example:**
+
+```html
+<div id="product-cds-rate-component" data-mode="favorable"></div>
+```
+
+- **ID**: The React component for the CD Calculator will attach to the `<div>` with `id="product-cds-rate-component"`.
+- **Manual Mode (Optional)**:  
+  Use the `data-mode` attribute to **manually control the mode**.  
+  Possible values:
+    - `favorable`
+    - `unfavorable`
+
+**If no `data-mode` attribute is provided**, the component will **fetch a rate from the API** and determine the mode based on a **4% threshold**:
+- **Above 4%**: Shows the favorable version.
+- **4% or below**: Shows the unfavorable version.
+
+---
+
+### **2. HYS Calculator Example:**
+
+```html
+<div id="product-hys-rate-component" data-mode="unfavorable"></div>
+```
+
+- **ID**: The React component for the HYS Calculator will attach to the `<div>` with `id="product-hys-rate-component"`.
+- **Manual Mode Override**: If the `data-mode` attribute is present, it will override any API-based logic.
+
+---
+
+### **3. Off-Term CD Calculator Example:**
+
+```html
+<div id="product-offterm-cd-component"></div>
+```
+
+- **ID**: The Off-Term CD Calculator component attaches to `id="product-offterm-cd-component"`.
+- This component **does not require mode switching** since it only renders a simple mobile/desktop version.
+
+---
+
+## Development and Preview Instructions
+
+- Use the **view components** (like `CDView.jsx`) for **local development and previews**. These allow for testing the calculators without CMS integration.
+
+---
+
+## Exporting Components
+
+In `src/index.js`, the following components are exported for CMS use:
+
+```javascript
+export { default as HYSCalculator } from './components/HYSCalculator';
+export { default as CDCalculator } from './components/CDCalculator';
+export { default as OffTermCDCalculator } from './components/OffTermCDCalculator';
+```
+
+You can **import these components** in the CMS or other environments like so:
+
+```javascript
+import { CDCalculator, HYSCalculator, OffTermCDCalculator } from 'synchrony-savings-calculator';
+```
+
+---
+
+## API Logic
+
+If no manual override is provided, the calculators will fetch data from the API:
+
+- **API Endpoint**: `/api/rates` (Replace with actual endpoint).
+- **Rate Threshold**:
+    - **Above 4%**: Displays favorable version.
+    - **4% or below**: Displays unfavorable version.
+
+If the API call fails or returns invalid data, the component will **default to the unfavorable mode**.
+
+---
+
+## Accessibility and Compliance
+
+- Ensure all components follow **ADA guidelines** for accessibility.
+- Use appropriate **ARIA labels**, focus management, and semantic HTML for all interactive elements.
+
+---
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for more information.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
