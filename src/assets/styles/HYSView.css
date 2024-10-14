@@ -1,23 +1,37 @@
+/* src/assets/styles/HYSView.css */
+
 .hys-container {
-  padding: 20px;
-  background-color: #f0f4ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+  background-color: #f4f6f9; /* Light background */
+  min-height: 100vh;
 }
 
-.hys-desktop {
-  font-size: 24px;
-  color: #1a73e8;
-}
-
-.hys-mobile {
-  font-size: 20px;
-  color: #4285f4;
-  border: 1px solid #4285f4;
-  padding: 10px;
+button {
+  margin: 20px 0;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #0063cc;
+  color: white;
+  border: none;
   border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-@media (max-width: 768px) {
-  .hys-container { padding: 15px; }
-  .hys-mobile { font-size: 18px; }
-  button { width: 100%; padding: 12px; }
+button:hover {
+  background-color: #004c99;
+}
+
+/* Grid Layout for Desktop */
+@media (min-width: 769px) {
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    width: 100%;
+    max-width: 1200px;
+  }
 }

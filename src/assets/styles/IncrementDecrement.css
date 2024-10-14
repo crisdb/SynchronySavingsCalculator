@@ -1,0 +1,15 @@
+/* src/assets/styles/IncrementDecrement.css */
+.increment-decrement {
+    display: flex;
+    align-items: center;
+    background-color: #073b4c; /* Dark blue */
+    border-radius: 24px;
+    padding: 5px 10px;
+    color: white;
+    width: 180px;
+    justify-content: space-between;
+}
+
+.increment-decrement button {
+    color: white;
+}
