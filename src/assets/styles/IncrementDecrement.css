@@ -2,14 +2,52 @@
 .increment-decrement {
     display: flex;
     align-items: center;
-    background-color: #00344D; /* Dark blue */
-    border-radius: 24px;
-    padding: 5px 10px;
-    color: white;
-    width: 180px;
     justify-content: space-between;
+    background-color: #939da2;
+    color: white;
+    border-radius: 24px;
+    padding: 5px 8px;
+    transition: width 0.2s ease-in-out; /* Smooth resizing */
+}
+
+.increment-decrement.large {
+    width: 180px;  /* Full size for the first two */
+    height: 37px;  /* Fixed height */
+}
+
+.increment-decrement.small {
+    width: 146px;  /* Smaller size for "Grow my savings" */
+    height: 37px;  /* Fixed height */
 }
 
 .increment-decrement button {
     color: white;
+    min-width: 40px;
+    height: 100%; /* Ensure buttons align with container height */
+}
+
+.increment-decrement input {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    width: 80px; /* Adjust for input field size */
+}
+
+@media (max-width: 1024px) {
+    .increment-decrement.large {
+        width: 160px; /* Shrink size for mid-sized screens */
+    }
+    .increment-decrement.small {
+        width: 130px;
+    }
+}
+
+@media (max-width: 768px) {
+    .increment-decrement.large {
+        width: 140px; /* Further shrink for narrow screens */
+    }
+    .increment-decrement.small {
+        width: 120px;
+    }
 }

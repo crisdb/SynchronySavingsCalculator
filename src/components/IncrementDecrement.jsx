@@ -1,49 +1,61 @@
 // src/components/IncrementDecrement.jsx
 import React, { useState } from 'react';
-import { Box, IconButton, Typography, styled } from '@mui/material';
+import { Box, IconButton, TextField } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import '../assets/styles/IncrementDecrement.css'; // Import CSS
 
-const StyledBox = styled(Box)({
-    display: 'flex',
-    alignItems: 'center',
-    backgroundColor: '#00344D',
-    borderRadius: '24px',
-    padding: '5px 10px',
-    color: '#fff',
-    width: '180px',
-    justifyContent: 'space-between',
-});
-
-const IncrementDecrement = ({ initialValue, step, min, max, onChange }) => {
+const IncrementDecrement = ({ initialValue = 0, step = 1, min = 0, max = 100, onChange, size = 'large' }) => {
     const [value, setValue] = useState(initialValue);
 
     const handleIncrement = () => {
         const newValue = Math.min(value + step, max);
         setValue(newValue);
-        onChange(newValue);
+        onChange && onChange(newValue);
     };
 
     const handleDecrement = () => {
         const newValue = Math.max(value - step, min);
         setValue(newValue);
-        onChange(newValue);
+        onChange && onChange(newValue);
+    };
+
+    const handleChange = (e) => {
+        const inputValue = e.target.value;
+        if (/^\d*$/.test(inputValue)) { // Only allow numeric input
+            const numericValue = Math.max(min, Math.min(parseInt(inputValue || 0, 10), max));
+            setValue(numericValue);
+            onChange && onChange(numericValue);
+        }
     };
 
     return (
-        <StyledBox>
-            <IconButton onClick={handleDecrement} sx={{ color: '#fff' }}>
+        <Box className={`increment-decrement ${size}`}>
+            <IconButton onClick={handleDecrement}>
                 <RemoveIcon />
             </IconButton>
 
-            <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                ${value.toLocaleString()}
-            </Typography>
+            <TextField
+                value={value}
+                onChange={handleChange}
+                variant="standard"
+                inputProps={{
+                    style: {
+                        textAlign: 'center',
+                        fontSize: '24px',
+                        fontWeight: 'bold',
+                        width: '80px',
+                        color: 'white',
+                    },
+                    inputMode: 'numeric',
+                    pattern: '[0-9]*',
+                }}
+            />
 
-            <IconButton onClick={handleIncrement} sx={{ color: '#fff' }}>
+            <IconButton onClick={handleIncrement}>
                 <AddIcon />
             </IconButton>
-        </StyledBox>
+        </Box>
     );
 };
 
