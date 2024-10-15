@@ -34,3 +34,24 @@
     font-size: 16px;
     margin: 4px 0;
 }
+.container {
+    background-color: #FFFFFF; /* White background */
+    padding: 32px;
+}
+
+.section {
+    background-color: #F8F8F9; /* Light gray background */
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.summary {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.summary-button {
+    align-self: flex-start;
+    margin-top: 16px;
+}
