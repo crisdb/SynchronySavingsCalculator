@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="103fc6dc-50d4-46f5-8ef3-4fd9e5fb2cdc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/assets/styles/HYSCalculator.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/HYSCalculator.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/HYSCalculator.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HYSCalculator.jsx" afterDir="false" />
-    </list>
+    <list default="true" id="103fc6dc-50d4-46f5-8ef3-4fd9e5fb2cdc" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
