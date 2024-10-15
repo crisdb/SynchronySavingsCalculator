@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Box, IconButton, TextField } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import '../assets/styles/IncrementDecrement.css'; // Import CSS
+import '../assets/styles/IncrementDecrement.css'; // Import the CSS file
 
 const IncrementDecrement = ({ initialValue = 0, step = 1, min = 0, max = 100, onChange, size = 'large' }) => {
     const [value, setValue] = useState(initialValue);
@@ -31,7 +31,7 @@ const IncrementDecrement = ({ initialValue = 0, step = 1, min = 0, max = 100, on
 
     return (
         <Box className={`increment-decrement ${size}`}>
-            <IconButton onClick={handleDecrement}>
+            <IconButton onClick={handleDecrement} className="button">
                 <RemoveIcon />
             </IconButton>
 
@@ -52,7 +52,7 @@ const IncrementDecrement = ({ initialValue = 0, step = 1, min = 0, max = 100, on
                 }}
             />
 
-            <IconButton onClick={handleIncrement}>
+            <IconButton onClick={handleIncrement} className="button">
                 <AddIcon />
             </IconButton>
         </Box>
