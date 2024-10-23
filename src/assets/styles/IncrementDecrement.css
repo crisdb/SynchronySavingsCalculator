@@ -1,39 +1,102 @@
 /* src/assets/styles/IncrementDecrement.css */
+
 .increment-decrement {
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: #00344D;
     border-radius: 24px;
-    padding: 5px 8px;
+    padding: 3px 8px; /* Reduced vertical padding */
     width: 220px;
     min-width: 220px; /* Prevent shrinking below this width */
     transition: all 0.2s ease-in-out;
 }
 
 .increment-decrement .button {
-    width: 40px;
-    height: 37px; /* Fixed height to prevent shrinking */
-    flex-shrink: 0; /* Prevent button from shrinking */
+    width: 28px; /* Reduced width */
+    height: 28px; /* Reduced height */
+    flex-shrink: 0;
     color: white;
+    border: 2px solid white;
+    border-radius: 50%;
+    background-color: transparent;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s, color 0.2s;
+    margin: 0 4px;
 }
 
-.increment-decrement input {
+.increment-decrement .button:hover {
+    border-color: #00BFFF;
+    color: #00BFFF;
+}
+
+.increment-decrement .button .MuiSvgIcon-root {
+    font-size: 18px;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1; /* Takes up remaining space */
+    max-width: 120px; /* Limits combined width of $ and input */
+}
+
+.dollar-sign {
+    font-size: 28px; /* Larger font size */
+    color: white; /* White color */
+    margin-right: -10px; /* Space between $ and number */
+    flex-shrink: 0; /* Prevents the dollar sign from shrinking */
+}
+.dollar-sign-single {
+    font-size: 28px; /* Larger font size */
+    color: white; /* White color */
+    margin-right: -5px; /* Space between $ and number */
+    flex-shrink: 0; /* Prevents the dollar sign from shrinking */
+}
+
+.input-field {
     text-align: center;
     font-size: 24px;
     font-weight: bold;
     color: white;
-    width: 80px;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    flex: 1; /* Allows the input to take available space */
+    max-width: 80px; /* Prevents the input from exceeding this width */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Adds ellipsis if text is too long */
+    white-space: nowrap; /* Prevents text from wrapping */
 }
 
 @media (max-width: 1024px) {
     .increment-decrement {
-        width: 180px; /* Adjust width for smaller screens */
+        width: 180px;
     }
 }
 
 @media (max-width: 768px) {
     .increment-decrement {
-        width: 160px; /* Further adjustment for narrow screens */
+        width: 160px;
+    }
+
+    .dollar-sign {
+        font-size: 24px; /* Slightly smaller on small screens */
+        margin-right: 2px; /* Reduce space */
+    }
+
+    .input-field {
+        font-size: 20px;
+        max-width: 60px; /* Further reduced for smaller screens */
+    }
+
+    .button .MuiSvgIcon-root {
+        font-size: 16px;
     }
 }
