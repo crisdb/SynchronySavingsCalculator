@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="103fc6dc-50d4-46f5-8ef3-4fd9e5fb2cdc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/views/CDView.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/CDView.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/HYSView.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/HYSView.jsx" afterDir="false" />
-    </list>
+    <list default="true" id="103fc6dc-50d4-46f5-8ef3-4fd9e5fb2cdc" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +14,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript JSX File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -23,6 +24,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2nQzbx7PqqToPWtluYhLQQA90Kf" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -30,18 +34,27 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "ts.external.directory.path": "C:\\Users\\cbaumgarten\\AppData\\Local\\JetBrains\\WebStorm 2022.1\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Rebasing decrement&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/cbaumgarten/WebstormProjects/SynchronySavingsCalculator/src/assets/fonts&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\cbaumgarten\\AppData\\Local\\JetBrains\\WebStorm 2022.1\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\cbaumgarten\WebstormProjects\SynchronySavingsCalculator\src\assets\fonts" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\cbaumgarten\WebstormProjects\Synchrony\src\components" />
     </key>
@@ -55,7 +68,13 @@
       <option name="presentableId" value="Default" />
       <updated>1728920163044</updated>
       <workItem from="1728920164236" duration="3328000" />
-      <workItem from="1728925800002" duration="5774000" />
+      <workItem from="1728925800002" duration="11032000" />
+      <workItem from="1729007550753" duration="466000" />
+      <workItem from="1729103224034" duration="2977000" />
+      <workItem from="1729704028372" duration="24000" />
+      <workItem from="1729789105989" duration="6000" />
+      <workItem from="1730566871433" duration="952000" />
+      <workItem from="1731446661735" duration="7013000" />
     </task>
     <servers />
   </component>

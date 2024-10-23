@@ -1,5 +1,4 @@
 body {
-  font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f5f5f5;
@@ -28,4 +27,11 @@ button {
 
 button:hover {
   background-color: #2e7d32;
+}
+
+.sub-title {
+
+    font-family: 'SynchronySansBold', sans-serif;
+    font-size: 24px;
+    margin: 0;
 }

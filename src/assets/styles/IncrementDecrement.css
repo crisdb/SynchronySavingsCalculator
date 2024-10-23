@@ -1,0 +1,120 @@
+/* src/assets/styles/IncrementDecrement.css */
+
+.increment-decrement {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #00344D;
+    border-radius: 24px;
+    padding: 3px 8px;
+    width: 250px; /* Increased width for larger values */
+    min-width: 250px;
+    transition: all 0.2s ease-in-out;
+}
+/* Styling for the + and - buttons */
+.increment-decrement .button {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    color: white;
+    border: 2px solid white;
+    border-radius: 50%;
+    background-color: transparent;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s, color 0.2s;
+    margin: 0 4px;
+}
+
+.increment-decrement .button:hover {
+    border-color: #00BFFF;
+    color: #00BFFF;
+}
+
+/* Ensuring the SVG icons within the buttons are white */
+.increment-decrement .button .MuiSvgIcon-root {
+    font-size: 18px;
+    color: white; /* Ensures icon color is white */
+}
+
+/* White stroke around the icons for better visibility */
+.icon {
+    stroke: #FFFFFF;
+    stroke-width: 2px;
+}
+
+/* Wrapper for input and dollar sign */
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    max-width: 160px; /* Increased max-width */
+}
+
+/* Styling for the dollar sign */
+.dollar-sign {
+    font-size: 28px;
+    color: white;
+    margin-right: -10px;
+    flex-shrink: 0;
+}
+
+.dollar-sign-single {
+    font-size: 28px;
+    color: white;
+    margin-right: -5px;
+    flex-shrink: 0;
+}
+
+/* Styling for the input field */
+.input-field {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-width: 120px; /* Adjusted to fit larger numbers */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media (max-width: 1024px) {
+    .increment-decrement {
+        width: 180px;
+    }
+}
+
+@media (max-width: 768px) {
+    .increment-decrement {
+        width: 160px;
+    }
+
+    .dollar-sign {
+        font-size: 24px;
+        margin-right: 2px;
+    }
+
+    .input-field {
+        font-size: 20px;
+        max-width: 60px;
+    }
+
+    .button .MuiSvgIcon-root {
+        font-size: 16px;
+    }
+}
+
+/* Styling for the custom dots on the chart */
+.chart-dot {
+    stroke: #FFFFFF;
+    stroke-width: 2px;
+}
