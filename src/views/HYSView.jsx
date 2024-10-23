@@ -1,10 +1,10 @@
-// src/views/HYSView.jsx
 import React, { useState, useEffect } from 'react';
 import HYSCalculator from '../components/HYSCalculator'; // Main calculator component
 import '../assets/styles/HYSView.css';
 
-//
-// // USE THIS TO EMULATE THE CMS AND COMMENT OUT ABOVE
+
+
+//USE THIS TO EMULATE THE CMS AND COMMENT OUT ABOVE
 //
 // import React from 'react';
 // import HYSCalculator from '../components/HYSCalculator';
@@ -12,13 +12,14 @@ import '../assets/styles/HYSView.css';
 // // Simulate the CMS environment locally
 // const HYSView = () => (
 //     <div id="product-hys-rate-component" data-mode="unfavorable">
-//         <h1>HYS Calculator - Development Preview</h1>
+//         <h1>HYS Calculator - CMS Development Preview</h1>
 //         <HYSCalculator />
 //     </div>
 // );
 //
 // export default HYSView;
-//
+
+
 
 const HYSView = () => {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);

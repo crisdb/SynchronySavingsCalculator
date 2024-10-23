@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="103fc6dc-50d4-46f5-8ef3-4fd9e5fb2cdc" name="Changes" comment="" />
+    <list default="true" id="103fc6dc-50d4-46f5-8ef3-4fd9e5fb2cdc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/assets/styles/RightSummary.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/RightSummary.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/HYSCalculator.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HYSCalculator.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/HYSView.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/HYSView.jsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,6 +61,9 @@
       <updated>1728920163044</updated>
       <workItem from="1728920164236" duration="3328000" />
       <workItem from="1728925800002" duration="11032000" />
+      <workItem from="1729007550753" duration="466000" />
+      <workItem from="1729103224034" duration="2977000" />
+      <workItem from="1729704028372" duration="24000" />
     </task>
     <servers />
   </component>

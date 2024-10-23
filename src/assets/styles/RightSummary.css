@@ -1,0 +1,44 @@
+/* src/assets/styles/RightSummary.css */
+.right-summary {
+    background-color: #D6EFFA; /* Light blue background */
+    border-radius: 16px; /* Rounded corners */
+    width: 235px; /* Fixed width */
+    height: 461px; /* Fixed height */
+    padding: 32px; /* Inner padding */
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Spacing between elements */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.right-summary-title {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.right-summary-text {
+    font-size: 18px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.right-summary-section h6 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.right-summary-section p {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.right-summary-button {
+    width: 100%; /* Full width button */
+    margin-top: 16px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: none; /* Keep normal casing */
+}

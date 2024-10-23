@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Box, Typography, Button, Slider } from '@mui/material';
 import IncrementDecrement from './IncrementDecrement';
+import RightSummary from "./RightSummary";
 import Chart from './Chart';
 import '../assets/styles/HYSCalculator.css';
 
@@ -156,23 +157,34 @@ const HYSCalculator = ({ mode = 'favorable' }) => {
                             </Box>
                         </Grid>
 
-                        <Grid item xs={12} md={5} className="summary">
-                            <Box>
-                                <Typography variant="h6">Summary</Typography>
-                                <Typography>Total Interest Earned: ${interest}</Typography>
-                                <Typography>
-                                    Total Contributions: ${deposit + monthlyContribution * (term * 12)}
-                                </Typography>
-                                <Typography>Total Savings: ${totalSavings}</Typography>
-                            </Box>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                className="summary-button"
-                            >
-                                Open Account
-                            </Button>
-                        </Grid>
+
+                        {/*<Grid item xs={12} md={5} className="summary">*/}
+                        {/*    <Box>*/}
+                        {/*        <Typography variant="h6">Summary</Typography>*/}
+                        {/*        <Typography>Total Interest Earned: ${interest}</Typography>*/}
+                        {/*        <Typography>*/}
+                        {/*            Total Contributions: ${deposit + monthlyContribution * (term * 12)}*/}
+                        {/*        </Typography>*/}
+                        {/*        <Typography>Total Savings: ${totalSavings}</Typography>*/}
+                        {/*    </Box>*/}
+                        {/*    <Button*/}
+                        {/*        variant="contained"*/}
+                        {/*        color="primary"*/}
+                        {/*        className="summary-button"*/}
+                        {/*    >*/}
+                        {/*        Open Account*/}
+                        {/*    </Button>*/}
+                        {/*</Grid>*/}
+                        <RightSummary
+                            interest={interest}
+                            totalContributions={deposit + monthlyContribution * (term * 12)}
+                            totalSavings={totalSavings}
+                        />
+
+
+
+
+
                     </Grid>
                 </Grid>
             </Grid>
