@@ -143,9 +143,9 @@ const HYSCalculator = ({ mode = 'favorable' }) => {
                     className="section"
                     sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
                 >
-                    <Typography variant="h4" sx={{ fontSize: '24px' }}>
+                    <span className="sub-title" >
                         Your earnings with Synchrony Bank High Yield Savings
-                    </Typography>
+                    </span>
 
                     <Grid container spacing={2} sx={{ flexGrow: 1 }}>
                         <Grid item xs={12} md={7}>

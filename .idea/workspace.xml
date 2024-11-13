@@ -5,11 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="103fc6dc-50d4-46f5-8ef3-4fd9e5fb2cdc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/assets/fonts/SynchronySansBoldItalic_v100.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/fonts/SynchronySansBold_v100.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/fonts/SynchronySansMediumItalic_v100.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/fonts/SynchronySansMedium_v100.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/fonts/SynchronySansNormalItalic_v100.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/fonts/SynchronySansNormal_v100.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/fonts/SynchronySansThinItalic_v100.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/fonts/SynchronySansThin_v100.ttf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/styles/IncrementDecrement.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/IncrementDecrement.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/IncrementDecrement.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/IncrementDecrement.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/styles/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/styles/RightSummary.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/RightSummary.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/HYSCalculator.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HYSCalculator.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RightSummary.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RightSummary.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +40,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2nQzbx7PqqToPWtluYhLQQA90Kf" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -43,7 +56,10 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "decrement",
+    "last_opened_file_path": "C:/Users/cbaumgarten/WebstormProjects/SynchronySavingsCalculator/src/assets/fonts",
     "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
@@ -52,6 +68,9 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\cbaumgarten\WebstormProjects\SynchronySavingsCalculator\src\assets\fonts" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\cbaumgarten\WebstormProjects\Synchrony\src\components" />
     </key>
@@ -69,6 +88,9 @@
       <workItem from="1729007550753" duration="466000" />
       <workItem from="1729103224034" duration="2977000" />
       <workItem from="1729704028372" duration="24000" />
+      <workItem from="1729789105989" duration="6000" />
+      <workItem from="1730566871433" duration="952000" />
+      <workItem from="1731446661735" duration="7013000" />
     </task>
     <servers />
   </component>
