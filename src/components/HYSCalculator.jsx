@@ -67,61 +67,65 @@ const HYSCalculator = ({ mode = 'favorable' }) => {
                     <Box mt={2}>
                         <Typography variant="h6">Start saving with:</Typography>
                         <IncrementDecrement
-                            initialValue={deposit}
+                            value={deposit}
                             step={500}
                             min={0}
                             max={100000}
-                            onChange={setDeposit}
+                            onChange={(newValue) => setDeposit(newValue)}
                         />
                         <Slider
                             value={deposit}
                             min={0}
                             max={100000}
                             step={500}
-                            onChange={(e, value) => setDeposit(value)}
+                            onChange={(e, newValue) => setDeposit(newValue)}
                             valueLabelDisplay="auto"
                         />
                     </Box>
+
+
+                    {/* Contribute this much monthly */}
                     <Box mt={3}>
                         <Typography variant="h6">Contribute this much monthly:</Typography>
                         <IncrementDecrement
-                            initialValue={monthlyContribution}
+                            value={monthlyContribution}
                             step={50}
                             min={0}
                             max={10000}
-                            onChange={setMonthlyContribution}
+                            onChange={(newValue) => setMonthlyContribution(newValue)}
                         />
                         <Slider
                             value={monthlyContribution}
                             min={0}
                             max={10000}
                             step={50}
-                            onChange={(e, value) => setMonthlyContribution(value)}
+                            onChange={(e, newValue) => setMonthlyContribution(newValue)}
                             valueLabelDisplay="auto"
                         />
                     </Box>
+
+                    {/* Grow my savings for this long */}
                     <Box mt={3}>
                         <Typography variant="h6">Grow my savings for this long:</Typography>
                         <IncrementDecrement
-                            initialValue={term}
+                            value={term}
                             step={1}
                             min={1}
                             max={10}
-                            onChange={setTerm}
+                            onChange={(newValue) => setTerm(newValue)}
                         />
                         <Slider
                             value={term}
                             min={1}
                             max={10}
                             step={1}
-                            onChange={(e, value) => setTerm(value)}
+                            onChange={(e, newValue) => setTerm(newValue)}
                             valueLabelDisplay="auto"
                         />
                     </Box>
                     <Box mt={3}>
                         <Typography variant="body2" sx={{ color: 'gray', textAlign: 'center' }}>
-                            Legal TBD: Calculator estimates are for illustrative purposes only. Source: Curinos LLC.
-                        </Typography>
+                            Legal TBD: Calculator estimates are for illustrative purposes only. Account growth, interest earned and comparisons are estimates and actual savings amounts may vary. Source: Curinos LLC. curinos.com Although the information has been obtained from the various institutions themselves, the accuracy cannot be guaranteed. See disclosures below for more information.                        </Typography>
                     </Box>
                 </Box>
 

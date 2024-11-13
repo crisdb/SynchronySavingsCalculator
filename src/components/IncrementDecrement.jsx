@@ -1,29 +1,24 @@
-// src/components/IncrementDecrement.jsx
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import '../assets/styles/IncrementDecrement.css'; // Ensure correct path
+import '../assets/styles/IncrementDecrement.css';
 
 const IncrementDecrement = ({
-                                initialValue = 0,
+                                value = 0,
                                 step = 1,
                                 min = 0,
                                 max = 1000,
                                 onChange,
                                 size = 'large',
                             }) => {
-    const [value, setValue] = useState(initialValue);
-
     const handleIncrement = () => {
         const newValue = Math.min(value + step, max);
-        setValue(newValue);
         onChange && onChange(newValue);
     };
 
     const handleDecrement = () => {
         const newValue = Math.max(value - step, min);
-        setValue(newValue);
         onChange && onChange(newValue);
     };
 
@@ -31,14 +26,8 @@ const IncrementDecrement = ({
         const inputValue = e.target.value.replace(/\D/g, ''); // Remove non-digit characters
         if (/^\d*$/.test(inputValue)) {
             const numericValue = parseInt(inputValue || 0, 10);
-            if (numericValue < min || numericValue > max) {
-                const clampedValue = Math.max(min, Math.min(numericValue, max));
-                setValue(clampedValue);
-                onChange && onChange(clampedValue);
-            } else {
-                setValue(numericValue);
-                onChange && onChange(numericValue);
-            }
+            const clampedValue = Math.max(min, Math.min(numericValue, max));
+            onChange && onChange(clampedValue);
         }
     };
 
