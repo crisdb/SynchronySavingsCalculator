@@ -87,6 +87,7 @@
 .highlight-8x {
     font-size: 45px; /* Updated to larger size */
     color: #BCE4F8; /* Updated color for "8X" */
+    font-family: 'SynchronySansBold', sans-serif;
 }
 
 .right-summary-highlight .highlight-subtext {

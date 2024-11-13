@@ -6,15 +6,15 @@
     justify-content: space-between;
     background-color: #00344D;
     border-radius: 24px;
-    padding: 3px 8px; /* Reduced vertical padding */
-    width: 220px;
-    min-width: 220px; /* Prevent shrinking below this width */
+    padding: 3px 8px;
+    width: 250px; /* Increased width for larger values */
+    min-width: 250px;
     transition: all 0.2s ease-in-out;
 }
-
+/* Styling for the + and - buttons */
 .increment-decrement .button {
-    width: 28px; /* Reduced width */
-    height: 28px; /* Reduced height */
+    width: 28px;
+    height: 28px;
     flex-shrink: 0;
     color: white;
     border: 2px solid white;
@@ -33,31 +33,43 @@
     color: #00BFFF;
 }
 
+/* Ensuring the SVG icons within the buttons are white */
 .increment-decrement .button .MuiSvgIcon-root {
     font-size: 18px;
+    color: white; /* Ensures icon color is white */
 }
 
+/* White stroke around the icons for better visibility */
+.icon {
+    stroke: #FFFFFF;
+    stroke-width: 2px;
+}
+
+/* Wrapper for input and dollar sign */
 .input-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex: 1; /* Takes up remaining space */
-    max-width: 120px; /* Limits combined width of $ and input */
+    flex: 1;
+    max-width: 160px; /* Increased max-width */
 }
 
+/* Styling for the dollar sign */
 .dollar-sign {
-    font-size: 28px; /* Larger font size */
-    color: white; /* White color */
-    margin-right: -10px; /* Space between $ and number */
-    flex-shrink: 0; /* Prevents the dollar sign from shrinking */
-}
-.dollar-sign-single {
-    font-size: 28px; /* Larger font size */
-    color: white; /* White color */
-    margin-right: -5px; /* Space between $ and number */
-    flex-shrink: 0; /* Prevents the dollar sign from shrinking */
+    font-size: 28px;
+    color: white;
+    margin-right: -10px;
+    flex-shrink: 0;
 }
 
+.dollar-sign-single {
+    font-size: 28px;
+    color: white;
+    margin-right: -5px;
+    flex-shrink: 0;
+}
+
+/* Styling for the input field */
 .input-field {
     text-align: center;
     font-size: 24px;
@@ -68,11 +80,11 @@
     outline: none;
     padding: 0;
     margin: 0;
-    flex: 1; /* Allows the input to take available space */
-    max-width: 80px; /* Prevents the input from exceeding this width */
+    width: 100%;
+    max-width: 120px; /* Adjusted to fit larger numbers */
     overflow: hidden;
-    text-overflow: ellipsis; /* Adds ellipsis if text is too long */
-    white-space: nowrap; /* Prevents text from wrapping */
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 @media (max-width: 1024px) {
@@ -87,16 +99,22 @@
     }
 
     .dollar-sign {
-        font-size: 24px; /* Slightly smaller on small screens */
-        margin-right: 2px; /* Reduce space */
+        font-size: 24px;
+        margin-right: 2px;
     }
 
     .input-field {
         font-size: 20px;
-        max-width: 60px; /* Further reduced for smaller screens */
+        max-width: 60px;
     }
 
     .button .MuiSvgIcon-root {
         font-size: 16px;
     }
+}
+
+/* Styling for the custom dots on the chart */
+.chart-dot {
+    stroke: #FFFFFF;
+    stroke-width: 2px;
 }
