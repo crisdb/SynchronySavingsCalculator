@@ -1,57 +1,61 @@
-.hys-calculator {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    background-color: white;
-    padding: 32px;
-    border-radius: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 800px;
-}
-
-.increment-decrement {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #00344D;
-    color: white;
-    padding: 10px;
-    border-radius: 24px;
-    width: 180px;
-}
-
-.summary {
-    margin-top: 24px;
-}
-
-.summary h6 {
-    font-size: 20px;
-    margin-bottom: 8px;
-}
-
-.summary p {
-    font-size: 16px;
-    margin: 4px 0;
-}
-.container {
-    background-color: #FFFFFF; /* White background */
-    padding: 32px;
-}
-
+/* Container Styling */
 .section {
-    background-color: #F8F8F9; /* Light gray background */
+    background-color: #F8F8F9;
     border-radius: 8px;
-    padding: 16px;
-}
-
-.summary {
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
 }
 
-.summary-button {
-    align-self: flex-start;
-    margin-top: 16px;
+/* Left Column */
+.left-section {
+    flex: 1 1 500px;
+    max-width: 500px;
+    min-width: 300px;
+}
+
+/* Right Column (Chart and Summary) */
+.right-section {
+    flex: 1 1 855px;
+    max-width: 855px;
+    min-width: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 58px;
+}
+
+/* Chart Section */
+.chart-container {
+    flex: 2;
+    min-width: 300px;
+}
+
+/* Right Summary Styling */
+.right-summary {
+    flex: 1;
+    background-color: #F3F4F6;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.right-summary-section {
+    margin-bottom: 20px;
+}
+
+.highlight-text {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.highlight-8x {
+    color: #0071b9;
+    font-size: 30px;
+}
+
+.right-summary-button {
+    margin-top: 20px;
+    background-color: #0071b9;
+    color: white;
+    width: 100%;
 }
