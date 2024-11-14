@@ -1,45 +1,121 @@
 import React, { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import Skeleton from '@mui/material/Skeleton';
+import '../assets/styles/Chart.css';
 
-const Chart = ({ zoom }) => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+const Chart = ({term, deposit, monthlyContribution }) => {
+  const generateChartData = () => {
+    const data = [];
+    const monthlyRate = (4.65 / 100) / 12; // 4.65% APY
+    const nationalRate = (0.56 / 100) / 12; // 0.56% APY for national average
+    let totalAmount = deposit;
+    let maxSavings = deposit;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-        const result = await response.json();
-        const chartData = result.slice(0, zoom).map((item) => ({
-          name: `Item ${item.id}`,
-          value: item.id * 10,
-        }));
-        setData(chartData);
-      } catch (error) {
-        console.error('Failed to fetch data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    // Add initial point at year 0
+    data.push({
+      year: 0,
+      totalSavings: deposit.toFixed(2),
+      interestEarned: '0.00',
+    });
 
-    fetchData();
-  }, [zoom]);
+    // Dta points for each year
+    for (let year = 1; year <= term; year++) {
+      const months = year * 12;
+      totalAmount = deposit * Math.pow(1 + monthlyRate, months) +
+          (monthlyContribution * (Math.pow(1 + monthlyRate, months) - 1)) / monthlyRate;
 
-  if (loading) {
-    return <Skeleton variant="rectangular" width="100%" height={300} />;
-  }
+      const totalContributions = deposit + monthlyContribution * months;
+      const interestEarned = totalAmount - totalContributions;
+
+      data.push({
+        year,
+        totalSavings: totalAmount.toFixed(2),
+        interestEarned: interestEarned.toFixed(2),
+      });
+
+      maxSavings = Math.max(maxSavings, totalAmount);
+    }
+
+    return { data, maxSavings };
+  };
+
+  const { data, maxSavings } = generateChartData();
+  const yAxisMax = Math.ceil(maxSavings * 1.1);
+
+  const formatDollar = (value) => `$${parseFloat(value).toLocaleString()}`;
+
+  // Custom tooltip content
+  const customTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      const { totalSavings, interestEarned, year } = payload[0].payload;
+      return (
+          <div className="custom-tooltip">
+            <strong>{`Year ${year}`}</strong>
+            <div>Total Balance: {formatDollar(totalSavings)}</div>
+            <div>Interest Earned: {formatDollar(interestEarned)}</div>
+          </div>
+      );
+    }
+    return null;
+  };
+
+  // Dot with a white stroke
+  const renderCustomDot = (props) => {
+    const { cx, cy, payload } = props;
+    return (
+        <circle
+            cx={cx}
+            cy={cy}
+            r={5}
+            fill="#0071b9"
+            stroke="#FFFFFF"
+            strokeWidth={2}
+            className="chart-dot"
+        />
+    );
+  };
 
   return (
-    <ResponsiveContainer width="100%" height={300}>
-      <LineChart data={data}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Line type="monotone" dataKey="value" stroke="#8884d8" />
-      </LineChart>
-    </ResponsiveContainer>
+      <div className="chart-container">
+        <ResponsiveContainer width={492} height={445}>
+          <LineChart data={data} margin={{ top: 20, right: 60, left: 30, bottom: 30 }}>
+            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+
+            <XAxis
+                dataKey="year"
+                type="number"
+                domain={[0, term]}
+                ticks={Array.from({ length: Math.ceil(term) + 1 }, (_, i) => i)}
+                label={{ value: 'Years', position: 'insideBottom', offset: -10 }}
+            />
+
+            <YAxis
+                domain={[0, yAxisMax]}
+                ticks={Array.from({ length: 5 }, (_, i) => Math.ceil((yAxisMax / 4) * i))}
+                tickFormatter={formatDollar}
+            />
+
+            <Line
+                type="monotone"
+                dataKey="totalSavings"
+                stroke="#0071b9"
+                strokeWidth={3}
+                dot={renderCustomDot}
+            />
+
+            <Tooltip content={customTooltip} />
+          </LineChart>
+        </ResponsiveContainer>
+
+        {/* Legend */}
+        <div className="chart-legend">
+          <div className="legend-item">
+            <span className="legend-dot synchrony-dot" /> Synchrony Bank (4.65% APY*)
+          </div>
+          <div className="legend-item">
+            <span className="legend-dot national-dot" /> National Average (0.56% APY*)
+          </div>
+        </div>
+      </div>
   );
 };
 

@@ -31,7 +31,7 @@
     min-width: 300px;
 }
 
-/* Right Summary Styling */
+/* Right Summary */
 .right-summary {
     flex: 1;
     background-color: #F3F4F6;
@@ -46,11 +46,6 @@
 .highlight-text {
     font-weight: bold;
     font-size: 24px;
-}
-
-.highlight-8x {
-    color: #0071b9;
-    font-size: 30px;
 }
 
 .right-summary-button {

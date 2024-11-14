@@ -111,13 +111,13 @@ const HYSCalculator = ({ mode = 'favorable' }) => {
                             value={term}
                             step={1}
                             min={1}
-                            max={10}
+                            max={30}
                             onChange={(newValue) => setTerm(newValue)}
                         />
                         <Slider
                             value={term}
                             min={1}
-                            max={10}
+                            max={30}
                             step={1}
                             onChange={(e, newValue) => setTerm(newValue)}
                             valueLabelDisplay="auto"
@@ -143,8 +143,12 @@ const HYSCalculator = ({ mode = 'favorable' }) => {
                 >
                     <Box className="chart-container" sx={{ flex: 2 }}>
                         <Typography>Synchrony Bank (4.65% APY*) vs National Average (0.56% APY*)</Typography>
-                        <Chart zoom={chartZoom} />
-                    </Box>
+                        <Chart
+                            term={term}
+                            deposit={deposit}
+                            monthlyContribution={monthlyContribution}
+                            zoom={chartZoom}
+                        />                    </Box>
                     <RightSummary
                         interest={interest}
                         totalContributions={deposit + monthlyContribution * (term * 12)}
