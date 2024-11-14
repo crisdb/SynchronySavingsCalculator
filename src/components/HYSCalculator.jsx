@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Box, Typography, Button, Slider } from '@mui/material';
+import { Box, Typography, Slider } from '@mui/material';
 import IncrementDecrement from './IncrementDecrement';
-import RightSummary from "./RightSummary";
+import RightSummary from './RightSummary';
 import Chart from './Chart';
 import '../assets/styles/HYSCalculator.css';
 
@@ -11,14 +11,10 @@ const HYSCalculator = ({ mode = 'favorable' }) => {
     const [monthlyContribution, setMonthlyContribution] = useState(250);
     const [term, setTerm] = useState(5);
 
+    //Chart zoom based on mode
     const chartZoom = mode === 'favorable' ? 10 : 5;
 
-    useEffect(() => {
-        const handleResize = () => setIsMobile(window.innerWidth <= 768);
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
+    // Calculate the savings and interest
     const calculateSavings = () => {
         const monthlyRate = (4.65 / 100) / 12;
         const months = term * 12;
@@ -31,6 +27,9 @@ const HYSCalculator = ({ mode = 'favorable' }) => {
 
     const { totalSavings, interest } = calculateSavings();
 
+    // Calculate maximum y-axis value with a cap
+    const maxSavingsCap = 2000000; // Cap at $2 million
+    const yAxisMax = Math.min(Math.ceil(totalSavings / 100000) * 100000, maxSavingsCap);
 
     return (
         <Box sx={{ padding: 4, backgroundColor: '#FFFFFF', minHeight: '100vh' }}>
@@ -38,32 +37,25 @@ const HYSCalculator = ({ mode = 'favorable' }) => {
                 sx={{
                     display: 'flex',
                     flexDirection: { xs: 'column', lg: 'row' },
-                    flexWrap: { xs: 'wrap', lg: 'nowrap' },
                     justifyContent: 'space-between',
                     alignItems: 'flex-start',
-                    gap: '10px',
+                    gap: '20px',
                     maxWidth: '1400px',
                     margin: '0 auto'
                 }}
             >
                 {/* Left Section */}
                 <Box
-                    className="section left-section"
+                    className="left-section"
                     sx={{
-                        flex: '0 0 500px',
-                        maxWidth: '500px',
-                        minWidth: '300px',
+                        padding: 16,
                         backgroundColor: '#F8F8F9',
-                        padding: 4,
-                        borderRadius: 2,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center'
+                        borderRadius: '10px 0 0 10px',
+                        flex: '0 0 25%',
+                        maxWidth: '350px'
                     }}
                 >
-                    <Typography variant="h4" sx={{ fontSize: '24px', textAlign: 'center' }}>
-                        I want to...
-                    </Typography>
+                    <Typography variant="h4" sx={{ textAlign: 'center' }}>I want to...</Typography>
                     <Box mt={2}>
                         <Typography variant="h6">Start saving with:</Typography>
                         <IncrementDecrement
@@ -71,7 +63,7 @@ const HYSCalculator = ({ mode = 'favorable' }) => {
                             step={500}
                             min={0}
                             max={100000}
-                            onChange={(newValue) => setDeposit(newValue)}
+                            onChange={setDeposit}
                         />
                         <Slider
                             value={deposit}
@@ -83,8 +75,7 @@ const HYSCalculator = ({ mode = 'favorable' }) => {
                         />
                     </Box>
 
-
-                    {/* Contribute this much monthly */}
+                    {/* Monthly Contribution */}
                     <Box mt={3}>
                         <Typography variant="h6">Contribute this much monthly:</Typography>
                         <IncrementDecrement
@@ -92,7 +83,7 @@ const HYSCalculator = ({ mode = 'favorable' }) => {
                             step={50}
                             min={0}
                             max={10000}
-                            onChange={(newValue) => setMonthlyContribution(newValue)}
+                            onChange={setMonthlyContribution}
                         />
                         <Slider
                             value={monthlyContribution}
@@ -104,7 +95,7 @@ const HYSCalculator = ({ mode = 'favorable' }) => {
                         />
                     </Box>
 
-                    {/* Grow my savings for this long */}
+                    {/* Term */}
                     <Box mt={3}>
                         <Typography variant="h6">Grow my savings for this long:</Typography>
                         <IncrementDecrement
@@ -112,7 +103,8 @@ const HYSCalculator = ({ mode = 'favorable' }) => {
                             step={1}
                             min={1}
                             max={30}
-                            onChange={(newValue) => setTerm(newValue)}
+                            onChange={setTerm}
+                            showDollarSign={false}
                         />
                         <Slider
                             value={term}
@@ -123,43 +115,22 @@ const HYSCalculator = ({ mode = 'favorable' }) => {
                             valueLabelDisplay="auto"
                         />
                     </Box>
-                    <Box mt={3}>
-                        <Typography variant="body2" sx={{ color: 'gray', textAlign: 'center' }}>
-                            Legal TBD: Calculator estimates are for illustrative purposes only. Account growth, interest earned and comparisons are estimates and actual savings amounts may vary. Source: Curinos LLC. curinos.com Although the information has been obtained from the various institutions themselves, the accuracy cannot be guaranteed. See disclosures below for more information.                        </Typography>
-                    </Box>
                 </Box>
 
-                {/* Right Section */}
-                <Box
-                    className="section right-section"
-                    sx={{
-                        flex: '1 1 auto',
-                        display: 'flex',
-                        flexDirection: { xs: 'column', lg: 'row' },
-                        gap: '58px',
-                        alignItems: 'flex-start',
-                        minWidth: '300px'
-                    }}
-                >
-                    <Box className="chart-container" sx={{ flex: 2 }}>
-                        <Typography>Synchrony Bank (4.65% APY*) vs National Average (0.56% APY*)</Typography>
-                        <Chart
-                            term={term}
-                            deposit={deposit}
-                            monthlyContribution={monthlyContribution}
-                            zoom={chartZoom}
-                        />                    </Box>
-                    <RightSummary
-                        interest={interest}
-                        totalContributions={deposit + monthlyContribution * (term * 12)}
-                        totalSavings={totalSavings}
+                {/* Middle Section with Chart */}
+                <Box className="chart-container" sx={{ flex: '1 1 65%', backgroundColor: '#F8F8F9' }}>
+                    <Typography sx={{ textAlign: 'center' }}>Synchrony Bank (4.65% APY*) vs National Average (0.56% APY*)</Typography>
+                    <Chart
+                        term={term}
+                        deposit={deposit}
+                        monthlyContribution={monthlyContribution}
+                        yAxisMax={yAxisMax}
+                        zoom={chartZoom}
                     />
                 </Box>
             </Box>
         </Box>
     );
-
-
 };
 
 export default HYSCalculator;

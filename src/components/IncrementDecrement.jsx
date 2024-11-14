@@ -4,47 +4,42 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import '../assets/styles/IncrementDecrement.css';
 
+
 const IncrementDecrement = ({
-                                value = 0,
+                                value,
                                 step = 1,
                                 min = 0,
-                                max = 1000,
+                                max = 100,
                                 onChange,
                                 size = 'large',
+                                showDollarSign = true,
                             }) => {
     const handleIncrement = () => {
         const newValue = Math.min(value + step, max);
-        onChange && onChange(newValue);
+        onChange(newValue);
     };
 
     const handleDecrement = () => {
         const newValue = Math.max(value - step, min);
-        onChange && onChange(newValue);
+        onChange(newValue);
     };
 
     const handleChange = (e) => {
-        const inputValue = e.target.value.replace(/\D/g, ''); // Remove non-digit characters
-        if (/^\d*$/.test(inputValue)) {
-            const numericValue = parseInt(inputValue || 0, 10);
-            const clampedValue = Math.max(min, Math.min(numericValue, max));
-            onChange && onChange(clampedValue);
+        const inputValue = e.target.value.replace(/\D/g, '');
+        const numericValue = parseInt(inputValue || 0, 10);
+        if (numericValue <= max && numericValue >= min) {
+            onChange(numericValue);
         }
     };
 
     return (
         <Box className={`increment-decrement ${size}`}>
-            <IconButton
-                onClick={handleDecrement}
-                className="button"
-                aria-label="decrement"
-                size="small"
-                tabIndex="0"
-            >
-                <RemoveIcon />
+            <IconButton onClick={handleDecrement} aria-label="decrement" size="small" className="icon-button">
+                <RemoveIcon className="icon" />
             </IconButton>
 
             <div className="input-wrapper">
-                <span className="dollar-sign">$</span>
+                {showDollarSign ? <span className="dollar-sign">$</span> : null}
                 <input
                     type="text"
                     value={value}
@@ -54,14 +49,8 @@ const IncrementDecrement = ({
                 />
             </div>
 
-            <IconButton
-                onClick={handleIncrement}
-                className="button"
-                aria-label="increment"
-                size="small"
-                tabIndex="0"
-            >
-                <AddIcon />
+            <IconButton onClick={handleIncrement} aria-label="increment" size="small" className="icon-button">
+                <AddIcon className="icon" />
             </IconButton>
         </Box>
     );

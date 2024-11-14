@@ -76,24 +76,28 @@ const Chart = ({term, deposit, monthlyContribution }) => {
 
   return (
       <div className="chart-container">
-        <ResponsiveContainer width={492} height={445}>
+        <ResponsiveContainer width={600} height={445}>
           <LineChart data={data} margin={{ top: 20, right: 60, left: 30, bottom: 30 }}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} />
 
+            {/* X-Axis for Years */}
             <XAxis
                 dataKey="year"
                 type="number"
                 domain={[0, term]}
-                ticks={Array.from({ length: Math.ceil(term) + 1 }, (_, i) => i)}
+                tickCount={term + 1}
+                interval={0} // Show every year
                 label={{ value: 'Years', position: 'insideBottom', offset: -10 }}
             />
 
+            {/* Y-Axis for Total Savings */}
             <YAxis
                 domain={[0, yAxisMax]}
-                ticks={Array.from({ length: 5 }, (_, i) => Math.ceil((yAxisMax / 4) * i))}
+                ticks={Array.from({ length: term + 1 }, (_, i) => Math.ceil((yAxisMax / term) * i))}
                 tickFormatter={formatDollar}
             />
 
+            {/* Line for Total Savings */}
             <Line
                 type="monotone"
                 dataKey="totalSavings"
@@ -102,10 +106,10 @@ const Chart = ({term, deposit, monthlyContribution }) => {
                 dot={renderCustomDot}
             />
 
+            {/* Tooltip */}
             <Tooltip content={customTooltip} />
           </LineChart>
         </ResponsiveContainer>
-
         {/* Legend */}
         <div className="chart-legend">
           <div className="legend-item">
