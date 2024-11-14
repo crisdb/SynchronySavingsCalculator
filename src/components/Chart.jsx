@@ -99,7 +99,7 @@ const Chart = ({term, deposit, monthlyContribution }) => {
 
             {/* Line for Total Savings */}
             <Line
-                type="monotone"
+                type="basis"
                 dataKey="totalSavings"
                 stroke="#0071b9"
                 strokeWidth={3}
