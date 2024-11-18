@@ -1,6 +1,7 @@
-/* src/assets/styles/HYSView.css */
+/* src/assets/styles/HYSComparisonView.css */
 
-.hys-container {
+/* Root Container for the View */
+.hys-comparison-view {
   display: flex;
   flex-direction: column;
   align-items: center;

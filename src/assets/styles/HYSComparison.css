@@ -1,0 +1,103 @@
+/* Global styles for the HYSComparison component */
+.hys-comparison {
+    border-radius: 10px;
+    background-color: #F8F8F9;
+    padding: 16px;
+}
+
+/* Combined Container for Chart and Summary */
+.combined-container {
+    display: flex;
+    gap: 20px;
+    background-color: #F8F8F9;
+    border-radius: 0 10px 10px 0;
+}
+
+/* Chart Section Styling */
+.chart-container {
+    flex: 2;
+    padding-right: 10px;
+}
+
+/* Summary Section Styling */
+.hys-summary {
+    flex: 1;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Legend Styling */
+.chart-legend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.synchrony-dot {
+    background-color: #0071b9;
+    border: 2px solid white;
+}
+
+.national-dot {
+    background-color: #9B9B9B;
+    border: 2px solid white;
+}
+
+/* Increment/Decrement Input Styling */
+.increment-decrement {
+    margin-bottom: 16px;
+}
+
+/* Adjust the input area */
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    max-width: 120px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .chart-container,
+    .hys-summary,
+    .combined-container {
+        flex: 1 1 100%;
+        margin-right: 0;
+        margin-left: 0;
+        margin-bottom: 20px;
+    }
+
+    .chart-container {
+        height: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .chart-container,
+    .hys-summary {
+        padding: 12px;
+    }
+
+    .combined-container {
+        flex-direction: column;
+    }
+}

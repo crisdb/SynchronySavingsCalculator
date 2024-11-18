@@ -14,6 +14,6 @@ if (document.getElementById('root')) {
 }
 
 // Export individual components for CMS usage
-export { default as HYSCalculator } from './components/HYSCalculator';
+export { default as HYSCalculator } from './components/HYSComparison';
 export { default as CDCalculator } from './components/CDCalculator';
 export { default as OffTermCDCalculator } from './components/OffTermCDCalculator';
