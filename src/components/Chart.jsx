@@ -3,6 +3,8 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import '../assets/styles/Chart.css';
 
 const Chart = ({ term, deposit, monthlyContribution }) => {
+  const maxSavingsCap = 3000000; // Hard cap at $3 million
+
   const generateChartData = () => {
     const data = [];
     const monthlyRate = (4.65 / 100) / 12; // 4.65% APY
@@ -11,9 +13,8 @@ const Chart = ({ term, deposit, monthlyContribution }) => {
 
     // Add initial point at year 0
     data.push({
-      key: `year-0`,
       year: 0,
-      totalSavings: parseFloat(deposit.toFixed(2)),
+      totalSavings: deposit,
       interestEarned: 0,
     });
 
@@ -28,10 +29,9 @@ const Chart = ({ term, deposit, monthlyContribution }) => {
       const interestEarned = totalAmount - totalContributions;
 
       data.push({
-        key: `year-${year}`,
         year,
-        totalSavings: parseFloat(totalAmount.toFixed(2)),
-        interestEarned: parseFloat(interestEarned.toFixed(2)),
+        totalSavings: totalAmount,
+        interestEarned: interestEarned,
       });
 
       maxSavings = Math.max(maxSavings, totalAmount);
@@ -41,11 +41,16 @@ const Chart = ({ term, deposit, monthlyContribution }) => {
   };
 
   const { data, maxSavings } = generateChartData();
-  const yAxisMax = Math.ceil(maxSavings * 1.1);
+
+  // Dynamically adjust Y-axis max
+  const dynamicYAxisMax = Math.min(Math.ceil(maxSavings * 1.1 / 100000) * 100000, maxSavingsCap);
+
+  // Generate ticks based on dynamic Y-axis max
+  const tickInterval = dynamicYAxisMax / 5;
+  const ticks = Array.from({ length: 6 }, (_, i) => Math.round(i * tickInterval));
 
   const formatDollar = (value) => `$${parseFloat(value).toLocaleString()}`;
 
-  // Custom tooltip content
   const customTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       const { year, totalSavings, interestEarned } = payload[0].payload;
@@ -60,17 +65,15 @@ const Chart = ({ term, deposit, monthlyContribution }) => {
     return null;
   };
 
-  // Custom dots for the chart
-  const renderCustomDot = ({ cx, cy, payload, index }) => (
+  const renderCustomDot = ({ cx, cy, index }) => (
       <circle
-          key={`dot-${index}`} // Add unique key
+          key={`dot-${index}`}
           cx={cx}
           cy={cy}
           r={5}
           fill="#0071b9"
           stroke="#FFFFFF"
           strokeWidth={2}
-          title={`Year: ${payload.year}, Total Savings: ${formatDollar(payload.totalSavings)}`}
       />
   );
 
@@ -92,19 +95,20 @@ const Chart = ({ term, deposit, monthlyContribution }) => {
 
             {/* Y-Axis for Total Savings */}
             <YAxis
-                domain={[0, yAxisMax]}
+                domain={[0, dynamicYAxisMax]}
+                ticks={ticks}
                 tickFormatter={formatDollar}
                 label={{ value: 'Total Savings', angle: -90, position: 'insideLeft', offset: -10 }}
             />
 
             {/* Line for Total Savings */}
             <Line
-                key="line-totalSavings" // Add unique key for the line
+                key="line-totalSavings"
                 type="basis"
                 dataKey="totalSavings"
                 stroke="#0071b9"
                 strokeWidth={3}
-                dot={renderCustomDot} // Render custom dots
+                dot={renderCustomDot}
             />
 
             {/* Tooltip */}
