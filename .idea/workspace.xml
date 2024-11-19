@@ -5,14 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="103fc6dc-50d4-46f5-8ef3-4fd9e5fb2cdc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/assets/styles/HYSComparison.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/HYSComparison.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/HYSComparisonView.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/rate.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/rateAPI.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/HYSLessFavorable.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/HYSLessFavorableMobile.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/styles/HYSCalculator.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/styles/HYSComparisonView.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/HYSComparisonView.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/HYSCalculator.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/HYSFavorable.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/HYSFavorableMobile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HYSComparisonMobile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/HYSView.jsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +28,8 @@
       <list>
         <option value="TypeScript JSX File" />
         <option value="CSS File" />
+        <option value="JSX File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -85,7 +91,7 @@
       <workItem from="1730566871433" duration="952000" />
       <workItem from="1731446661735" duration="7013000" />
       <workItem from="1731711780637" duration="36000" />
-      <workItem from="1731949669629" duration="5488000" />
+      <workItem from="1731949669629" duration="7969000" />
     </task>
     <servers />
   </component>

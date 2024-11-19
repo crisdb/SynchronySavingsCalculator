@@ -4,7 +4,6 @@ import HYSComparisonView from './views/HYSComparisonView';
 import CDView from './views/CDView';
 import OffTermCDView from './views/OffTermCDView';
 import './assets/styles/App.css';
-import HYSComparison from "./components/HYSComparison";
 
 const App = () => (
   <Router>
