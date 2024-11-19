@@ -1,64 +1,51 @@
-// src/views/CDView.jsx
 import React, { useState, useEffect } from 'react';
-import { Grid, Box, Button } from '@mui/material';
-import CDFavorable from '../components/CDFavorable';
-import CDLessFavorable from '../components/CDLessFavorable';
-import CDFavorableMobile from '../components/CDFavorableMobile';
-import CDLessFavorableMobile from '../components/CDLessFavorableMobile';
-import Chart from '../components/Chart';
-import '../assets/styles/CDView.css';
+import CDComparison from '../components/CDComparison';
+import '../assets/styles/CDComparisonView.css';
 
-const CDView = () => {
+// Uncomment the following lines to emulate the CMS environment locally
+// const CDComparisonView = () => (
+//     <div id="product-cd-rate-component" data-mode="unfavorable">
+//         <h1>CD Calculator - CMS Development Preview</h1>
+//         <CDComparison rate={4.5} deposit={1000} interest={200} totalSavings={1200} term={12} overrideFavorable={false} />
+//     </div>
+// );
+
+// export default CDComparisonView;
+
+const CDComparisonView = () => {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-    const [mode, setMode] = useState('favorable');
+    const [mode, setMode] = useState('favorable'); // Default mode
 
+    // window resizing for mobile/desktop layout
     useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth <= 768);
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    const chartZoom = mode === 'favorable' ? 5 : 10;
+    // C boolean for CDComparison
+    const overrideFavorable = mode === 'favorable';
 
     return (
-        <Box className="cd-container" sx={{ padding: 3 }}>
-            <Button
-                variant="contained"
-                color="primary"
+        <div className="cd-container" style={{ padding: '24px' }}>
+            <button
                 onClick={() => setMode((prev) => (prev === 'favorable' ? 'less-favorable' : 'favorable'))}
             >
                 Toggle to {mode === 'favorable' ? 'Less-Favorable' : 'Favorable'}
-            </Button>
+            </button>
+            <h1>See how much your money can grow.</h1>
 
-            {isMobile ? (
-                mode === 'favorable' ? <CDFavorableMobile /> : <CDLessFavorableMobile />
-            ) : (
-                <Grid container spacing={2} sx={{ marginTop: 3 }}>
-                    <Grid item xs={12} md={5}>
-                        {mode === 'favorable' ? <CDFavorable /> : <CDLessFavorable />}
-                    </Grid>
-                    <Grid item xs={12} md={7}>
-                        <Chart zoom={chartZoom} />
-                    </Grid>
-                </Grid>
-            )}
-        </Box>
+            <CDComparison
+                rate={4.7}
+                deposit={1000}
+                interest={200}
+                totalSavings={1200}
+                term={12}
+                overrideFavorable={overrideFavorable}
+                isMobile={isMobile}
+            />
+        </div>
     );
 };
 
-export default CDView;
-
-
-// USE THIS TO EMULATE THE CMS AND COMMENT OUT ABOVE
-// import React from 'react';
-// import CDCalculator from '../components/CDCalculator';
-//
-// // Simulate the CMS environment locally
-// const CDView = () => (
-//     <div id="product-cds-rate-component" data-mode="favorable">
-//         <h1>CD Calculator - Development Preview</h1>
-//         <CDCalculator />
-//     </div>
-// );
-//
-// export default CDView;
+export default CDComparisonView;

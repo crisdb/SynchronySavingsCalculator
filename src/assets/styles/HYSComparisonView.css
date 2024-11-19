@@ -1,6 +1,3 @@
-/* src/assets/styles/HYSComparisonView.css */
-
-/* Root Container for the View */
 .hys-comparison-view {
   display: flex;
   flex-direction: column;
@@ -34,5 +31,29 @@ button:hover {
     gap: 32px;
     width: 100%;
     max-width: 1200px;
+  }
+}
+.chart-and-summary-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.chart-area {
+  flex: 1 1 100%;
+  min-width: 300px;
+}
+
+
+.right-summary {
+  flex: 1 1 300px;
+  min-width: 300px;
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .chart-area,
+  .right-summary {
+    flex: 1 1 100%;
   }
 }

@@ -5,14 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="103fc6dc-50d4-46f5-8ef3-4fd9e5fb2cdc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/assets/styles/HYSComparison.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/HYSComparison.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/HYSComparisonView.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/HYSLessFavorable.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/HYSLessFavorableMobile.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/styles/CDView.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CDCalculator.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CDFavorable.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CDFavorableMobile.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CDLessFavorable.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CDLessFavorableMobile.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Chart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Chart.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/HYSComparison.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HYSComparison.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/OffTermCDCalculator.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/OffTermCDDesktop.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/OffTermCDMobile.jsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/rate.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/rate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/rateAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/rateAPI.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/CDView.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/CDView.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/HYSComparisonView.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/HYSComparisonView.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/OffTermCDView.jsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,8 +34,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript JSX File" />
         <option value="CSS File" />
+        <option value="JSX File" />
+        <option value="JavaScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -48,23 +62,26 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Rebasing decrement&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/cbaumgarten/WebstormProjects/SynchronySavingsCalculator/src/assets/fonts&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/cbaumgarten/WebstormProjects/SynchronySavingsCalculator/src/assets/styles&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\cbaumgarten\\AppData\\Local\\JetBrains\\WebStorm 2022.1\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2023.3.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\cbaumgarten\WebstormProjects\SynchronySavingsCalculator\src\assets\styles" />
+      <recent name="C:\Users\cbaumgarten\WebstormProjects\SynchronySavingsCalculator\src\components" />
       <recent name="C:\Users\cbaumgarten\WebstormProjects\SynchronySavingsCalculator\src\assets\fonts" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\cbaumgarten\WebstormProjects\SynchronySavingsCalculator\src\services" />
       <recent name="C:\Users\cbaumgarten\WebstormProjects\Synchrony\src\components" />
     </key>
   </component>
@@ -85,7 +102,12 @@
       <workItem from="1730566871433" duration="952000" />
       <workItem from="1731446661735" duration="7013000" />
       <workItem from="1731711780637" duration="36000" />
-      <workItem from="1731949669629" duration="5488000" />
+      <workItem from="1731949669629" duration="12521000" />
+      <workItem from="1732730075317" duration="11597000" />
+      <workItem from="1733170074621" duration="1037000" />
+      <workItem from="1733255392103" duration="2679000" />
+      <workItem from="1733277695757" duration="6146000" />
+      <workItem from="1733355571913" duration="4067000" />
     </task>
     <servers />
   </component>

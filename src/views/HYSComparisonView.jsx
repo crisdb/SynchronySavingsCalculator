@@ -1,50 +1,66 @@
 import React, { useState, useEffect } from 'react';
-import HYSComparison from '../components/HYSComparison'; // Updated import
+import HYSComparison from '../components/HYSComparison';
 import '../assets/styles/HYSComparisonView.css';
-
-// Uncomment the following lines to emulate the CMS environment locally
-// const HYSComparisonView = () => (
-//     <div id="product-hys-rate-component" data-mode="unfavorable">
-//         <h1>HYS Calculator - CMS Development Preview</h1>
-//         <HYSComparison rate={4.5} deposit={1000} interest={200} totalSavings={1200} term={12} overrideFavorable={false} />
-//     </div>
-// );
-
-// export default HYSComparisonView;
 
 const HYSComparisonView = () => {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-    const [mode, setMode] = useState('favorable'); // Default mode
+    const [mode, setMode] = useState(null); // Initial mode is null until determined
+    const [rate, setRate] = useState(null);
+    const [cmsMode, setCmsMode] = useState(null); // Mode determined by CMS attribute
 
-    // Track window resizing to handle mobile/desktop layout
     useEffect(() => {
-        const handleResize = () => setIsMobile(window.innerWidth <= 768);
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
+        const cmsElement = document.getElementById('product-hys-rate-component');
+        const cmsMode = cmsElement?.getAttribute('data-mode');
+
+        if (cmsMode) {
+            setMode(cmsMode); // CMS mode takes precedence
+        } else {
+            fetch('https://api-uat.syf.com/v1/retailBank/products?serviceLevel=0000001')
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    const apiRate = data?.products?.[0]?.rate || 0;
+                    setRate(apiRate);
+                    setMode(apiRate >= 4 ? 'favorable' : 'unfavorable');
+                })
+                .catch((error) => {
+                    console.error('Error fetching API:', error);
+                    setMode('unfavorable'); // Default to unfavorable on error
+                    console.log('Mode set to unfavorable due to API error');
+                });
+        }
     }, []);
+    // Demo button for development only
+    const toggleMode = () => {
+        setMode((prev) => (prev === 'favorable' ? 'unfavorable' : 'favorable'));
+    };
 
-    // Convert mode to boolean for HYSComparison
-    const overrideFavorable = mode === 'favorable';
-
-    // Render the HYSComparison with the appropriate props
     return (
-        <div className="hys-container" style={{ padding: '24px' }}>
+        <div className="hys-container" style={{padding: '24px'}}>
+            {/* Toggle button for demo purposes, only visible in development */}
+            {process.env.NODE_ENV === 'development' && (
+                <button onClick={toggleMode}>
+                    {mode === 'favorable' ? 'Switch to Unfavorable (Demo)' : 'Switch to Favorable (Demo)'}
+                </button>
+            )}
             <h1>See how much your money can grow.</h1>
-            <button
-                onClick={() => setMode((prev) => (prev === 'favorable' ? 'less-favorable' : 'favorable'))}
-            >
-                Toggle to {mode === 'favorable' ? 'Less-Favorable' : 'Favorable'}
-            </button>
 
-            <HYSComparison
-                rate={4.5} // Example rate value for testing
-                deposit={1000} // Example deposit value
-                interest={200} // Example interest value
-                totalSavings={1200} // Example total savings value
-                term={12} // Example term in months
-                overrideFavorable={overrideFavorable}
-                isMobile={isMobile}
-            />
+            {mode && (
+                <HYSComparison
+                    rate={rate}
+                    deposit={1000}
+                    interest={200}
+                    totalSavings={1200}
+                    term={12}
+                    zoomLevel={mode === 'favorable' ? 'normal' : 'zoomed'}
+                    hideNationalAverage={mode === 'unfavorable'}
+                    isMobile={isMobile}
+                />
+            )}
         </div>
     );
 };

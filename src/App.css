@@ -8,11 +8,12 @@
   }
 }
 
-body, h1, h2, h3, h4 {
-  margin: 0;
-  font-family: 'SynchronySans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
+.legal-text {
+  font-family: Synchrony, Arial, sans-serif;
+  font-size: 11pt!important;
+  line-height: 1.4;
+  color: #666666!important;
+  text-align: left;
+  padding: 0 16px;
+  max-width: 100%;
 }

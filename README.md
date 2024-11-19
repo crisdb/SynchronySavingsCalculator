@@ -43,17 +43,6 @@ To use the components in your CMS, follow the examples below:
 
 ---
 
-### **3. Off-Term CD Calculator Example:**
-
-```html
-<div id="product-offterm-cd-component"></div>
-```
-
-- **ID**: The Off-Term CD Calculator component attaches to `id="product-offterm-cd-component"`.
-- This component **does not require mode switching** since it only renders a simple mobile/desktop version.
-
----
-
 ## Development and Preview Instructions
 
 - Use the **view components** (like `CDView.jsx`) for **local development and previews**. These allow for testing the calculators without CMS integration.
@@ -67,13 +56,12 @@ In `src/index.js`, the following components are exported for CMS use:
 ```javascript
 export { default as HYSCalculator } from './components/HYSCalculator';
 export { default as CDCalculator } from './components/CDCalculator';
-export { default as OffTermCDCalculator } from './components/OffTermCDCalculator';
 ```
 
 You can **import these components** in the CMS or other environments like so:
 
 ```javascript
-import { CDCalculator, HYSCalculator, OffTermCDCalculator } from 'synchrony-savings-calculator';
+import { CDCalculator, HYSCalculator,} from 'synchrony-savings-calculator';
 ```
 
 ---

@@ -4,18 +4,19 @@ import IncrementDecrement from './IncrementDecrement';
 import RightSummary from './RightSummary';
 import Chart from './Chart';
 import '../assets/styles/App.css';
-import '../assets/styles/HYSComparison.css';
+import '../assets/styles/CDComparison.css';
 
 import { fetchRateData } from '../services/rateAPI';
 
-const HYSComparison = () => {
+const CDComparison = ({ mode = 'favorable' }) => {
     const MAX_SAVINGS = 3000000; // Cap savings at $3 million
     const MAX_INITIAL_DEPOSIT = 300000; // Cap initial deposit at $300,000
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const [deposit, setDeposit] = useState(10000);
     const [monthlyContribution, setMonthlyContribution] = useState(250);
     const [term, setTerm] = useState(5);
-    const [apiRate, setApiRate] = useState(4.65); // Default HYS rate
+    const [apiRate, setApiRate] = useState(4.65);
+    const [apiNationalRate, setApiNationalRate] = useState(0.56);
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -28,15 +29,16 @@ const HYSComparison = () => {
         const loadRateData = async () => {
             try {
                 const data = await fetchRateData();
-                console.log('API Response:', data);
-
-                const hysRate = parseFloat(data?.productTypes?.products?.[0]?.maxRate.replace('%', '')) || 4.65;
-                console.log('Setting HYS Rate:', hysRate);
-                setApiRate(hysRate);
+                const product = data.productTypes.products.find(
+                    (product) => product.displayCode === 'MMA'
+                );
+                if (product) {
+                    setApiRate(parseFloat(product.maxRate.replace('%', '')) || 4.65);
+                    setApiNationalRate(parseFloat(product.maxAPY.replace('%', '')) || 0.56);
+                }
             } catch (err) {
                 console.error('Error fetching rate data:', err);
-                setApiRate(3.99);
-                setError('Failed to load rate data. Using fallback defaults.');
+                setError('Failed to load rate data. Using defaults.');
             }
         };
 
@@ -47,32 +49,35 @@ const HYSComparison = () => {
         const monthlyRate = (rate / 100) / 12;
         const months = term * 12;
 
+        // Calculate future value with monthly compounding
         const futureValue =
             deposit * Math.pow(1 + monthlyRate, months) +
             (monthlyContribution * (Math.pow(1 + monthlyRate, months) - 1)) / monthlyRate;
 
+        // Apply the maximum savings cap
         return Math.min(futureValue, MAX_SAVINGS);
     };
 
+    // Handle capped deposit value
     const handleDepositChange = (newValue) => {
         setDeposit(Math.min(newValue, MAX_INITIAL_DEPOSIT));
     };
 
+    // Calculate savings for Synchrony Bank and the general savings
     const synchronySavings = calculateSavings(deposit, monthlyContribution, term, apiRate);
     const totalSavings = calculateSavings(deposit, monthlyContribution, term, apiRate);
-    const totalContributions = deposit + monthlyContribution * term * 12;
+    const totalContributions = deposit + (monthlyContribution * term * 12);
     const interestEarned = Math.max(0, totalSavings - totalContributions);
-
+    const synchronyInterest = Math.max(0, synchronySavings - totalContributions);
     return (
-        <Box sx={{ padding: 4, minHeight: '100vh' }}>
+        <Box sx={{ padding: 4, backgroundColor: '#FFF', minHeight: '100vh' }}>
             <Box
                 sx={{
                     display: 'flex',
                     flexDirection: { xs: 'column', lg: 'row' },
                     justifyContent: 'space-between',
-                    alignItems: { xs: 'flex-start', lg: 'stretch' },
+                    alignItems: { xs: 'flex-start', lg: 'stretch' }, //stretch only on large screens
                     gap: '10px',
-                    backgroundColor: { xs: '#F8F8F9', lg: '#FFF' },
                     maxWidth: '1400px',
                     margin: '0 auto',
                 }}
@@ -83,20 +88,17 @@ const HYSComparison = () => {
                     sx={{
                         backgroundColor: '#F8F8F9',
                         borderRadius: '10px 0 0 10px',
-                        flex: {xs: '1 1 auto', lg: '0 0 25%'},
-                        maxWidth: {lg: '350px'},
+                        flex: { xs: '1 1 auto', lg: '0 0 25%' },
+                        maxWidth: { lg: '350px' },
                         minWidth: '300px',
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
                     }}
                 >
-                    <h5> Calculate your savings. </h5>
-
-                    <Typography variant="h4" sx={{textAlign: 'center'}}>
+                    <Typography variant="h4" sx={{ textAlign: 'center' }}>
                         I want to...
                     </Typography>
-
                     <Box mt={2} width="100%">
                         <Typography variant="h6">Start saving with:</Typography>
                         <IncrementDecrement
@@ -116,8 +118,8 @@ const HYSComparison = () => {
                             onChange={(e, newValue) => handleDepositChange(newValue)}
                             aria-labelledby="deposit-slider"
                             sx={{
-                                '& .MuiSlider-track': {color: '#006899'},
-                                '& .MuiSlider-rail': {color: '#CCCCCC'},
+                                '& .MuiSlider-track': { color: '#006899' },
+                                '& .MuiSlider-rail': { color: '#CCCCCC' },
                             }}
                         />
                     </Box>
@@ -140,8 +142,8 @@ const HYSComparison = () => {
                             onChange={(e, newValue) => setMonthlyContribution(newValue)}
                             aria-labelledby="monthly-contribution-slider"
                             sx={{
-                                '& .MuiSlider-track': {color: '#006899'},
-                                '& .MuiSlider-rail': {color: '#CCCCCC'},
+                                '& .MuiSlider-track': { color: '#006899' },
+                                '& .MuiSlider-rail': { color: '#CCCCCC' },
                             }}
                         />
                     </Box>
@@ -169,7 +171,7 @@ const HYSComparison = () => {
                         <Typography className="legal-text">
                             Legal TBD: Calculator estimates are for illustrative purposes only.
                             Account growth, interest earned, and comparisons are estimates, and
-                            actual savings amounts may vary. <br/>
+                            actual savings amounts may vary. <br />
                             Source: Curinos LLC. curinos.com Although the information has been
                             obtained from the various institutions themselves, the accuracy cannot
                             be guaranteed. See disclosures below for more information.
@@ -177,11 +179,11 @@ const HYSComparison = () => {
                     </Box>
                 </Box>
 
-                {/* Chart and Summary Section */}
+                {/* Right Section */}
                 <Box
                     sx={{
                         display: 'flex',
-                        flexDirection: { xs: 'column', lg: 'row' },
+                        flexDirection: 'row',
                         flex: 1,
                         alignItems: 'stretch',
                         gap: '10px',
@@ -190,32 +192,32 @@ const HYSComparison = () => {
                     <Box
                         className="chart-container"
                         sx={{
-                            flex: { xs: '1 1 auto', lg: 3 },
+                            flex: 3,
                             marginLeft: '8px',
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'space-between',
                             borderLeft: '2px solid white',
+
                         }}
                     >
                         <Typography variant="h4" sx={{ marginBottom: 2 }}>
                             Your earnings with Synchrony Bank High Yield Savings
                         </Typography>
-
                         <Chart
                             term={term}
                             deposit={deposit}
                             monthlyContribution={monthlyContribution}
                             apiRate={apiRate}
+                            apiNationalRate={apiNationalRate}
                             maxSavings={MAX_SAVINGS}
-                            hideNationalAverage={apiRate < 4}
                         />
                     </Box>
 
                     <Box
                         className="right-summary-container"
                         sx={{
-                            flex: { xs: '1 1 auto', lg: 1 },
+                            flex: 1,
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'space-between',
@@ -235,6 +237,12 @@ const HYSComparison = () => {
             </Box>
         </Box>
     );
+
+
+
+
+
+
 };
 
-export default HYSComparison;
+export default CDComparison;
