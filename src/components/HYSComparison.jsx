@@ -5,26 +5,52 @@ import RightSummary from './RightSummary';
 import Chart from './Chart';
 import '../assets/styles/HYSComparison.css';
 
+import { fetchRateData } from '../services/rateAPI';
 
 const HYSComparison = ({ mode = 'favorable' }) => {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const [deposit, setDeposit] = useState(10000);
     const [monthlyContribution, setMonthlyContribution] = useState(250);
     const [term, setTerm] = useState(5);
+    const [apiRate, setApiRate] = useState(4.65); // Default rate
+    const [apiNationalRate, setApiNationalRate] = useState(0.56); // Default national rate
+    const [error, setError] = useState(null);
 
-    // Track window resizing to handle mobile/desktop layout
+    // Track window resizing
     useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth <= 768);
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // Chart zoom based on mode
+    // Fetch rate data from API
+    useEffect(() => {
+        const loadRateData = async () => {
+            try {
+                const data = await fetchRateData();
+                const product = data.productTypes.products.find(
+                    (product) => product.displayCode === 'MMA' // Find Money Market product
+                );
+
+                if (product) {
+                    setApiRate(parseFloat(product.maxRate.replace('%', '')) || 4.65);
+                    setApiNationalRate(parseFloat(product.maxAPY.replace('%', '')) || 0.56);
+                }
+            } catch (err) {
+                console.error('Error fetching rate data:', err);
+                setError('Failed to load rate data. Using defaults.');
+            }
+        };
+
+        loadRateData();
+    }, []);
+
+    // Chart zoom level
     const chartZoom = mode === 'favorable' ? 10 : 5;
 
-    // Calculate the savings and interest
+    // Calculate savings and interest
     const calculateSavings = () => {
-        const monthlyRate = (4.65 / 100) / 12;
+        const monthlyRate = (apiRate / 100) / 12;
         const months = term * 12;
         const futureValue =
             deposit * Math.pow(1 + monthlyRate, months) +
@@ -35,8 +61,8 @@ const HYSComparison = ({ mode = 'favorable' }) => {
 
     const { totalSavings, interest } = calculateSavings();
 
-    // Calculate maximum y-axis value with a cap
-    const maxSavingsCap = 2000000; // Cap at $2 million
+    // Max savings cap
+    const maxSavingsCap = 2000000;
     const yAxisMax = Math.min(Math.ceil(totalSavings / 100000) * 100000, maxSavingsCap);
 
     return (
@@ -49,7 +75,7 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                     alignItems: 'flex-start',
                     gap: '20px',
                     maxWidth: '1400px',
-                    margin: '0 auto'
+                    margin: '0 auto',
                 }}
             >
                 {/* Left Section */}
@@ -65,7 +91,7 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        marginRight: '20px'
+                        marginRight: '20px',
                     }}
                 >
                     <Typography variant="h4" sx={{ textAlign: 'center' }}>I want to...</Typography>
@@ -139,7 +165,7 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                     </Box>
                 </Box>
 
-                {/* Middle + Right Section with Light Gray Background */}
+                {/* Middle + Right Section */}
                 <Box
                     className="combined-container"
                     sx={{
@@ -149,13 +175,13 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                         padding: 4,
                         display: 'flex',
                         gap: '20px',
-                        alignItems: 'flex-start'
+                        alignItems: 'flex-start',
                     }}
                 >
                     {/* Middle Section (Chart) */}
                     <Box className="chart-container" sx={{ flex: 2, paddingRight: '10px' }}>
                         <Typography sx={{ marginBottom: 2 }}>
-                            Synchrony Bank (4.65% APY*) vs National Average (0.56% APY*)
+                            Synchrony Bank ({apiRate}% APY*) vs National Average ({apiNationalRate}% APY*)
                         </Typography>
                         <Chart
                             term={term}
@@ -174,7 +200,7 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                             flexDirection: 'column',
                             gap: '20px',
                             alignItems: 'flex-start',
-                            minWidth: '250px'
+                            minWidth: '250px',
                         }}
                     >
                         <RightSummary
