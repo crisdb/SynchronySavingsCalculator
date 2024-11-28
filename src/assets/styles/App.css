@@ -35,3 +35,7 @@ button:hover {
     font-size: 24px;
     margin: 0;
 }
+.legal-text {
+     font-family: Synchrony, Arial, sans-serif;
+     font-size: 11pt;
+ }

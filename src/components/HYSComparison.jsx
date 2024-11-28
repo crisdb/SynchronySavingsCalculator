@@ -3,12 +3,13 @@ import { Box, Typography, Slider } from '@mui/material';
 import IncrementDecrement from './IncrementDecrement';
 import RightSummary from './RightSummary';
 import Chart from './Chart';
+import '../assets/styles/App.css';
 import '../assets/styles/HYSComparison.css';
 
 import { fetchRateData } from '../services/rateAPI';
 
 const HYSComparison = ({ mode = 'favorable' }) => {
-    const MAX_SAVINGS = 3000000; // Cap savings at $3 million
+    const MAX_SAVINGS = 300000;
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const [deposit, setDeposit] = useState(10000);
     const [monthlyContribution, setMonthlyContribution] = useState(250);
@@ -87,6 +88,14 @@ const HYSComparison = ({ mode = 'favorable' }) => {
 
                     <Box mt={2}>
                         <Typography variant="h6">Start saving with:</Typography>
+                        <Slider
+                            value={deposit}
+                            min={0}
+                            max={MAX_SAVINGS}
+                            step={500}
+                            onChange={(e, newValue) => setDeposit(newValue)}
+                            aria-labelledby="deposit-slider"
+                        />
                         <IncrementDecrement
                             value={deposit}
                             step={500}
@@ -98,6 +107,14 @@ const HYSComparison = ({ mode = 'favorable' }) => {
 
                     <Box mt={3}>
                         <Typography variant="h6">Contribute this much monthly:</Typography>
+                        <Slider
+                            value={monthlyContribution}
+                            min={0}
+                            max={10000}
+                            step={50}
+                            onChange={(e, newValue) => setMonthlyContribution(newValue)}
+                            aria-labelledby="monthly-contribution-slider"
+                        />
                         <IncrementDecrement
                             value={monthlyContribution}
                             step={50}
@@ -109,6 +126,14 @@ const HYSComparison = ({ mode = 'favorable' }) => {
 
                     <Box mt={3}>
                         <Typography variant="h6">Grow my savings for this long:</Typography>
+                        <Slider
+                            value={term}
+                            min={1}
+                            max={30}
+                            step={1}
+                            onChange={(e, newValue) => setTerm(newValue)}
+                            aria-labelledby="term-slider"
+                        />
                         <IncrementDecrement
                             value={term}
                             step={1}
@@ -116,6 +141,13 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                             max={30}
                             onChange={(newValue) => setTerm(newValue)}
                         />
+                    </Box>
+
+                    <Box mt={3}>
+                        <Typography className="legal-text">
+                            Legal TBD: Calculator estimates are for illustrative purposes only. Account growth, interest earned and comparisons are estimates and actual savings amounts may vary.
+                            Source: Curinos LLC. curinos.com Although the information has been obtained from the various institutions themselves, the accuracy cannot be guaranteed. See disclosures below for more information.
+                        </Typography>
                     </Box>
                 </Box>
 
