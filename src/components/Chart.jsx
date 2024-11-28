@@ -98,7 +98,7 @@ const Chart = ({ term, deposit, monthlyContribution }) => {
                 domain={[0, dynamicYAxisMax]}
                 ticks={ticks}
                 tickFormatter={formatDollar}
-                label={{ value: 'Total Savings', angle: -90, position: 'insideLeft', offset: -10 }}
+                label={{ value: '', angle: -90, position: 'insideLeft', offset: -10 }}
             />
 
             {/* Line for Total Savings */}

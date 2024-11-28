@@ -9,7 +9,7 @@ import '../assets/styles/HYSComparison.css';
 import { fetchRateData } from '../services/rateAPI';
 
 const HYSComparison = ({ mode = 'favorable' }) => {
-    const MAX_SAVINGS = 300000;
+    const MAX_SAVINGS = 3000000; // Cap savings at $3 million
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const [deposit, setDeposit] = useState(10000);
     const [monthlyContribution, setMonthlyContribution] = useState(250);
@@ -50,10 +50,20 @@ const HYSComparison = ({ mode = 'favorable' }) => {
         const futureValue =
             deposit * Math.pow(1 + monthlyRate, months) +
             (monthlyContribution * (Math.pow(1 + monthlyRate, months) - 1)) / monthlyRate;
-        return futureValue;
+
+        // Cap future value to $3 million
+        return Math.min(futureValue, MAX_SAVINGS);
     };
 
     const totalSavings = calculateSavings(deposit, monthlyContribution, term);
+
+    const totalContributions = deposit + (monthlyContribution * term * 12);
+
+    // Calculate interest earned, cap it to not go beyond max savings
+    const cappedInterest = Math.max(0, totalSavings - totalContributions);
+
+    // total contributions do not display more than MAX_SAVINGS
+    const displayContributions = Math.min(totalContributions, MAX_SAVINGS);
 
     return (
         <Box sx={{ padding: 4, backgroundColor: '#FFFFFF', minHeight: '100vh' }}>
@@ -91,7 +101,7 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                         <Slider
                             value={deposit}
                             min={0}
-                            max={MAX_SAVINGS}
+                            max={300000}
                             step={500}
                             onChange={(e, newValue) => setDeposit(newValue)}
                             aria-labelledby="deposit-slider"
@@ -100,8 +110,9 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                             value={deposit}
                             step={500}
                             min={0}
-                            max={MAX_SAVINGS}
+                            max={300000}
                             onChange={(newValue) => setDeposit(newValue)}
+                            showDollarSign={true}
                         />
                     </Box>
 
@@ -110,17 +121,18 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                         <Slider
                             value={monthlyContribution}
                             min={0}
-                            max={10000}
-                            step={50}
+                            max={5600}
+                            step={100}
                             onChange={(e, newValue) => setMonthlyContribution(newValue)}
                             aria-labelledby="monthly-contribution-slider"
                         />
                         <IncrementDecrement
                             value={monthlyContribution}
-                            step={50}
+                            step={100}
                             min={0}
-                            max={10000}
+                            max={5600}
                             onChange={(newValue) => setMonthlyContribution(newValue)}
+                            showDollarSign={true} // Display dollar sign for monthly contribution
                         />
                     </Box>
 
@@ -129,7 +141,7 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                         <Slider
                             value={term}
                             min={1}
-                            max={30}
+                            max={20}
                             step={1}
                             onChange={(e, newValue) => setTerm(newValue)}
                             aria-labelledby="term-slider"
@@ -138,14 +150,15 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                             value={term}
                             step={1}
                             min={1}
-                            max={30}
+                            max={20}
                             onChange={(newValue) => setTerm(newValue)}
+                            showDollarSign={false}
                         />
                     </Box>
 
                     <Box mt={3}>
                         <Typography className="legal-text">
-                            Legal TBD: Calculator estimates are for illustrative purposes only. Account growth, interest earned and comparisons are estimates and actual savings amounts may vary.
+                            Legal TBD: Calculator estimates are for illustrative purposes only. Account growth, interest earned, and comparisons are estimates and actual savings amounts may vary.
                             Source: Curinos LLC. curinos.com Although the information has been obtained from the various institutions themselves, the accuracy cannot be guaranteed. See disclosures below for more information.
                         </Typography>
                     </Box>
@@ -162,6 +175,7 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                         monthlyContribution={monthlyContribution}
                         apiRate={apiRate}
                         apiNationalRate={apiNationalRate}
+                        totalSavings={totalSavings}
                     />
                 </Box>
 
@@ -178,9 +192,9 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                     }}
                 >
                     <RightSummary
-                        interest={Math.round(totalSavings - (deposit + monthlyContribution * term * 12)).toLocaleString()}
-                        totalContributions={Math.round(deposit + monthlyContribution * term * 12).toLocaleString()}
-                        totalSavings={Math.round(totalSavings).toLocaleString()}
+                        interest={Math.round(cappedInterest).toLocaleString('en-US')}
+                        totalContributions={Math.round(displayContributions).toLocaleString('en-US')}
+                        totalSavings={Math.round(totalSavings).toLocaleString('en-US')}
                     />
                 </Box>
             </Box>

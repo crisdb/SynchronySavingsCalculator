@@ -4,7 +4,6 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import '../assets/styles/IncrementDecrement.css';
 
-
 const IncrementDecrement = ({
                                 value,
                                 step = 1,
@@ -42,7 +41,7 @@ const IncrementDecrement = ({
                 {showDollarSign ? <span className="dollar-sign">$</span> : null}
                 <input
                     type="text"
-                    value={value}
+                    value={value.toLocaleString('en-US')} // Format the value with commas
                     onChange={handleChange}
                     className="input-field"
                     aria-label="Amount"

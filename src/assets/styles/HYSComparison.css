@@ -1,11 +1,10 @@
-/* Global styles for the HYSComparison component */
 .hys-comparison {
     border-radius: 10px;
     background-color: #F8F8F9;
     padding: 16px;
 }
 
-/* Combined Container for Chart and Summary */
+/*  Chart and Summary */
 .combined-container {
     display: flex;
     gap: 20px;
@@ -13,13 +12,13 @@
     border-radius: 0 10px 10px 0;
 }
 
-/* Chart Section Styling */
+/* Chart Section */
 .chart-container {
     flex: 2;
     padding-right: 10px;
 }
 
-/* Summary Section Styling */
+/* Summary Section */
 .hys-summary {
     flex: 1;
     min-width: 250px;
@@ -66,7 +65,6 @@
     margin-bottom: 16px;
 }
 
-/* Adjust the input area */
 .input-wrapper {
     display: flex;
     align-items: center;
