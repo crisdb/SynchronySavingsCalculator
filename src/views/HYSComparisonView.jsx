@@ -29,7 +29,7 @@ const HYSComparisonView = () => {
     // Render the HYSComparison with the appropriate props
     return (
         <div className="hys-container" style={{ padding: '24px' }}>
-            <h1>See how much your money can grow.</h1>
+            {/*<h1>See how much your money can grow.</h1>*/}
             <button
                 onClick={() => setMode((prev) => (prev === 'favorable' ? 'less-favorable' : 'favorable'))}
             >
@@ -37,11 +37,11 @@ const HYSComparisonView = () => {
             </button>
 
             <HYSComparison
-                rate={4.5} // Example rate value for testing
-                deposit={1000} // Example deposit value
-                interest={200} // Example interest value
-                totalSavings={1200} // Example total savings value
-                term={12} // Example term in months
+                rate={4.7}
+                deposit={1000}
+                interest={200}
+                totalSavings={1200}
+                term={12}
                 overrideFavorable={overrideFavorable}
                 isMobile={isMobile}
             />

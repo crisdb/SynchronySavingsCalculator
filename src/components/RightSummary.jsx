@@ -2,15 +2,16 @@ import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import '../assets/styles/RightSummary.css';
 
-const RightSummary = ({ interest, totalContributions, totalSavings }) => {
+const RightSummary = ({ synchronyRate, interest, totalContributions, totalSavings }) => {
     return (
         <Box className="right-summary">
 
             <div className="right-summary-section">
-                <Typography variant="h6">Synchrony Bank High Yield Savings</Typography>
-                <Typography>${interest}</Typography>
+                <Typography variant="h6">
+                    Synchrony Bank <br /> High Yield Savings
+                </Typography>
+                <Typography className="right-summary-apr">{synchronyRate}% APY</Typography>
             </div>
-
 
             <div className="right-summary-section">
                 <Typography variant="h6">Your Total Interest Earned</Typography>
@@ -23,7 +24,7 @@ const RightSummary = ({ interest, totalContributions, totalSavings }) => {
             </div>
 
             <div className="right-summary-section">
-                <Typography variant="h6">Your Total Savings Over 5 Years</Typography>
+                <Typography variant="h6">Your Total Savings<br/> Over 5 Years</Typography>
                 <Typography>${totalSavings}</Typography>
             </div>
 
