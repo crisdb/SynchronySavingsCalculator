@@ -14,8 +14,8 @@ const HYSComparison = ({ mode = 'favorable' }) => {
     const [deposit, setDeposit] = useState(10000);
     const [monthlyContribution, setMonthlyContribution] = useState(250);
     const [term, setTerm] = useState(5);
-    const [apiRate, setApiRate] = useState(4.65); // Default rate
-    const [apiNationalRate, setApiNationalRate] = useState(0.56); // Default national rate
+    const [apiRate, setApiRate] = useState(4.65);
+    const [apiNationalRate, setApiNationalRate] = useState(0.56);
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -50,20 +50,10 @@ const HYSComparison = ({ mode = 'favorable' }) => {
         const futureValue =
             deposit * Math.pow(1 + monthlyRate, months) +
             (monthlyContribution * (Math.pow(1 + monthlyRate, months) - 1)) / monthlyRate;
-
-        // Cap future value to $3 million
-        return Math.min(futureValue, MAX_SAVINGS);
+        return futureValue > MAX_SAVINGS ? MAX_SAVINGS : futureValue;
     };
 
     const totalSavings = calculateSavings(deposit, monthlyContribution, term);
-
-    const totalContributions = deposit + (monthlyContribution * term * 12);
-
-    // Calculate interest earned, cap it to not go beyond max savings
-    const cappedInterest = Math.max(0, totalSavings - totalContributions);
-
-    // total contributions do not display more than MAX_SAVINGS
-    const displayContributions = Math.min(totalContributions, MAX_SAVINGS);
 
     return (
         <Box sx={{ padding: 4, backgroundColor: '#FFFFFF', minHeight: '100vh' }}>
@@ -101,7 +91,7 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                         <Slider
                             value={deposit}
                             min={0}
-                            max={300000}
+                            max={MAX_SAVINGS}
                             step={500}
                             onChange={(e, newValue) => setDeposit(newValue)}
                             aria-labelledby="deposit-slider"
@@ -110,9 +100,9 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                             value={deposit}
                             step={500}
                             min={0}
-                            max={300000}
+                            max={MAX_SAVINGS}
                             onChange={(newValue) => setDeposit(newValue)}
-                            showDollarSign={true}
+                            inputType="start-saving"
                         />
                     </Box>
 
@@ -121,18 +111,18 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                         <Slider
                             value={monthlyContribution}
                             min={0}
-                            max={5600}
-                            step={100}
+                            max={10000}
+                            step={50}
                             onChange={(e, newValue) => setMonthlyContribution(newValue)}
                             aria-labelledby="monthly-contribution-slider"
                         />
                         <IncrementDecrement
                             value={monthlyContribution}
-                            step={100}
+                            step={50}
                             min={0}
-                            max={5600}
+                            max={10000}
                             onChange={(newValue) => setMonthlyContribution(newValue)}
-                            showDollarSign={true} // Display dollar sign for monthly contribution
+                            inputType="monthly-contribution"
                         />
                     </Box>
 
@@ -141,7 +131,7 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                         <Slider
                             value={term}
                             min={1}
-                            max={20}
+                            max={30}
                             step={1}
                             onChange={(e, newValue) => setTerm(newValue)}
                             aria-labelledby="term-slider"
@@ -150,22 +140,22 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                             value={term}
                             step={1}
                             min={1}
-                            max={20}
+                            max={30}
                             onChange={(newValue) => setTerm(newValue)}
-                            showDollarSign={false}
+                            inputType="term"
                         />
                     </Box>
 
                     <Box mt={3}>
                         <Typography className="legal-text">
-                            Legal TBD: Calculator estimates are for illustrative purposes only. Account growth, interest earned, and comparisons are estimates and actual savings amounts may vary.
+                            Legal TBD: Calculator estimates are for illustrative purposes only. Account growth, interest earned and comparisons are estimates and actual savings amounts may vary.
                             Source: Curinos LLC. curinos.com Although the information has been obtained from the various institutions themselves, the accuracy cannot be guaranteed. See disclosures below for more information.
                         </Typography>
                     </Box>
                 </Box>
 
                 {/* Middle Section (Chart) */}
-                <Box className="chart-container" sx={{ flex: 2, paddingRight: '10px' }}>
+                <Box className="chart-container" sx={{ flex: 3, paddingRight: '20px' }}>
                     <Typography sx={{ marginBottom: 2 }}>
                         Synchrony Bank ({apiRate}% APY*) vs National Average ({apiNationalRate}% APY*)
                     </Typography>
@@ -175,7 +165,7 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                         monthlyContribution={monthlyContribution}
                         apiRate={apiRate}
                         apiNationalRate={apiNationalRate}
-                        totalSavings={totalSavings}
+                        maxSavings={MAX_SAVINGS} // Pass MAX_SAVINGS to Chart component to limit y-axis
                     />
                 </Box>
 
@@ -192,9 +182,9 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                     }}
                 >
                     <RightSummary
-                        interest={Math.round(cappedInterest).toLocaleString('en-US')}
-                        totalContributions={Math.round(displayContributions).toLocaleString('en-US')}
-                        totalSavings={Math.round(totalSavings).toLocaleString('en-US')}
+                        interest={Math.round(totalSavings - (deposit + monthlyContribution * term * 12)).toLocaleString()}
+                        totalContributions={Math.round(deposit + monthlyContribution * term * 12).toLocaleString()}
+                        totalSavings={Math.round(totalSavings).toLocaleString()}
                     />
                 </Box>
             </Box>

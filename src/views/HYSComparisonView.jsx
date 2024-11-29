@@ -29,7 +29,7 @@ const HYSComparisonView = () => {
     // Render the HYSComparison with the appropriate props
     return (
         <div className="hys-container" style={{ padding: '24px' }}>
-            <h1>See how much your money can grow.</h1>
+            {/*<h1>See how much your money can grow.</h1>*/}
             <button
                 onClick={() => setMode((prev) => (prev === 'favorable' ? 'less-favorable' : 'favorable'))}
             >

@@ -12,6 +12,7 @@ const IncrementDecrement = ({
                                 onChange,
                                 size = 'large',
                                 showDollarSign = true,
+                                inputType = "default",
                             }) => {
     const handleIncrement = () => {
         const newValue = Math.min(value + step, max);
@@ -24,16 +25,28 @@ const IncrementDecrement = ({
     };
 
     const handleChange = (e) => {
-        const inputValue = e.target.value.replace(/\D/g, '');
+        const inputValue = e.target.value.replace(/[^0-9]/g, '');
         const numericValue = parseInt(inputValue || 0, 10);
         if (numericValue <= max && numericValue >= min) {
             onChange(numericValue);
         }
     };
 
+    // Class differentiation for different input fields
+    const inputClass = inputType === 'start-saving'
+        ? 'input-field-start'
+        : inputType === 'monthly-contribution'
+            ? 'input-field-monthly'
+            : 'input-field-term';
+
     return (
         <Box className={`increment-decrement ${size}`}>
-            <IconButton onClick={handleDecrement} aria-label="decrement" size="small" className="icon-button">
+            <IconButton
+                onClick={handleDecrement}
+                aria-label="decrement"
+                size="small"
+                className="icon-button"
+            >
                 <RemoveIcon className="icon" />
             </IconButton>
 
@@ -41,14 +54,19 @@ const IncrementDecrement = ({
                 {showDollarSign ? <span className="dollar-sign">$</span> : null}
                 <input
                     type="text"
-                    value={value.toLocaleString('en-US')} // Format the value with commas
+                    value={value.toLocaleString('en-US')}
                     onChange={handleChange}
-                    className="input-field"
+                    className={`input-field ${inputClass}`}
                     aria-label="Amount"
                 />
             </div>
 
-            <IconButton onClick={handleIncrement} aria-label="increment" size="small" className="icon-button">
+            <IconButton
+                onClick={handleIncrement}
+                aria-label="increment"
+                size="small"
+                className="icon-button"
+            >
                 <AddIcon className="icon" />
             </IconButton>
         </Box>
