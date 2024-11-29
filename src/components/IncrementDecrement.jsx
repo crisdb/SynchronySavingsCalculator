@@ -32,7 +32,6 @@ const IncrementDecrement = ({
         }
     };
 
-    // Class differentiation for different input fields
     const inputClass = inputType === 'start-saving'
         ? 'input-field-start'
         : inputType === 'monthly-contribution'
@@ -46,12 +45,13 @@ const IncrementDecrement = ({
                 aria-label="decrement"
                 size="small"
                 className="icon-button"
+                disabled={value <= min}
             >
                 <RemoveIcon className="icon" />
             </IconButton>
 
             <div className="input-wrapper">
-                {showDollarSign ? <span className="dollar-sign">$</span> : null}
+                {showDollarSign && <span className="dollar-sign">$</span>}
                 <input
                     type="text"
                     value={value.toLocaleString('en-US')}
@@ -59,6 +59,7 @@ const IncrementDecrement = ({
                     className={`input-field ${inputClass}`}
                     aria-label="Amount"
                 />
+                {inputType === 'term' && <span className="unit">Year(s)</span>}
             </div>
 
             <IconButton
@@ -66,6 +67,7 @@ const IncrementDecrement = ({
                 aria-label="increment"
                 size="small"
                 className="icon-button"
+                disabled={value >= max}
             >
                 <AddIcon className="icon" />
             </IconButton>

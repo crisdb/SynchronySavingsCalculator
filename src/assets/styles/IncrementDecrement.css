@@ -77,3 +77,10 @@
     font-size: 1.25rem;
     color: #FFFFFF;
 }
+.unit {
+    margin-left: -13px;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.9);
+    vertical-align: text-bottom;
+    padding-top: 5px;
+}

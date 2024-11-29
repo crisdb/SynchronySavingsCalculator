@@ -9,7 +9,7 @@ import '../assets/styles/HYSComparison.css';
 import { fetchRateData } from '../services/rateAPI';
 
 const HYSComparison = ({ mode = 'favorable' }) => {
-    const MAX_SAVINGS = 3000000; // Cap savings at $3 million
+    const MAX_SAVINGS = 3000000;
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const [deposit, setDeposit] = useState(10000);
     const [monthlyContribution, setMonthlyContribution] = useState(250);
@@ -68,7 +68,6 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                     margin: '0 auto',
                 }}
             >
-                {/* Left Section */}
                 <Box
                     className="left-section"
                     sx={{
@@ -84,9 +83,11 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                         marginRight: '20px',
                     }}
                 >
-                    <Typography variant="h4" sx={{ textAlign: 'center' }}>I want to...</Typography>
+                    <Typography variant="h4" sx={{ textAlign: 'center' }}>
+                        I want to...
+                    </Typography>
 
-                    <Box mt={2}>
+                    <Box mt={2} width="100%">
                         <Typography variant="h6">Start saving with:</Typography>
                         <Slider
                             value={deposit}
@@ -103,10 +104,11 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                             max={MAX_SAVINGS}
                             onChange={(newValue) => setDeposit(newValue)}
                             inputType="start-saving"
+                            showDollarSign={true}
                         />
                     </Box>
 
-                    <Box mt={3}>
+                    <Box mt={3} width="100%">
                         <Typography variant="h6">Contribute this much monthly:</Typography>
                         <Slider
                             value={monthlyContribution}
@@ -123,15 +125,16 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                             max={10000}
                             onChange={(newValue) => setMonthlyContribution(newValue)}
                             inputType="monthly-contribution"
+                            showDollarSign={true}
                         />
                     </Box>
 
-                    <Box mt={3}>
+                    <Box mt={3} width="100%">
                         <Typography variant="h6">Grow my savings for this long:</Typography>
                         <Slider
                             value={term}
                             min={1}
-                            max={30}
+                            max={10}
                             step={1}
                             onChange={(e, newValue) => setTerm(newValue)}
                             aria-labelledby="term-slider"
@@ -140,21 +143,24 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                             value={term}
                             step={1}
                             min={1}
-                            max={30}
+                            max={10}
                             onChange={(newValue) => setTerm(newValue)}
                             inputType="term"
+                            showDollarSign={false}
                         />
                     </Box>
 
-                    <Box mt={3}>
+                    <Box mt={3} width="100%">
                         <Typography className="legal-text">
-                            Legal TBD: Calculator estimates are for illustrative purposes only. Account growth, interest earned and comparisons are estimates and actual savings amounts may vary.
-                            Source: Curinos LLC. curinos.com Although the information has been obtained from the various institutions themselves, the accuracy cannot be guaranteed. See disclosures below for more information.
+                            Legal TBD: Calculator estimates are for illustrative purposes only. Account growth,
+                            interest earned and comparisons are estimates and actual savings amounts may vary.
+                            Source: Curinos LLC. curinos.com Although the information has been obtained from the
+                            various institutions themselves, the accuracy cannot be guaranteed. See disclosures
+                            below for more information.
                         </Typography>
                     </Box>
                 </Box>
 
-                {/* Middle Section (Chart) */}
                 <Box className="chart-container" sx={{ flex: 3, paddingRight: '20px' }}>
                     <Typography sx={{ marginBottom: 2 }}>
                         Synchrony Bank ({apiRate}% APY*) vs National Average ({apiNationalRate}% APY*)
@@ -165,11 +171,10 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                         monthlyContribution={monthlyContribution}
                         apiRate={apiRate}
                         apiNationalRate={apiNationalRate}
-                        maxSavings={MAX_SAVINGS} // Pass MAX_SAVINGS to Chart component to limit y-axis
+                        maxSavings={MAX_SAVINGS}
                     />
                 </Box>
 
-                {/* Right Section */}
                 <Box
                     className="right-summary-container"
                     sx={{
