@@ -7,34 +7,45 @@ const Chart = ({ term, deposit, monthlyContribution }) => {
 
   const generateChartData = () => {
     const data = [];
-    const monthlyRate = (4.65 / 100) / 12; // 4.65% APY
-    let totalAmount = deposit;
+    const synchronyMonthlyRate = (4.65 / 100) / 12; // 4.65% APY
+    const nationalMonthlyRate = (0.56 / 100) / 12; // 0.56% APY
+    let synchronyTotal = deposit;
+    let nationalTotal = deposit;
     let maxSavings = deposit;
 
     // Add initial point at year 0
     data.push({
       year: 0,
-      totalSavings: deposit,
+      synchronySavings: deposit,
+      nationalSavings: deposit,
       interestEarned: 0,
     });
 
     // Generate data points for each year
     for (let year = 1; year <= term; year++) {
       const months = year * 12;
-      totalAmount =
-          deposit * Math.pow(1 + monthlyRate, months) +
-          (monthlyContribution * (Math.pow(1 + monthlyRate, months) - 1)) / monthlyRate;
+
+      // Calculate total savings for Synchrony Bank
+      synchronyTotal =
+          deposit * Math.pow(1 + synchronyMonthlyRate, months) +
+          (monthlyContribution * (Math.pow(1 + synchronyMonthlyRate, months) - 1)) / synchronyMonthlyRate;
+
+      // Calculate total savings for National Average
+      nationalTotal =
+          deposit * Math.pow(1 + nationalMonthlyRate, months) +
+          (monthlyContribution * (Math.pow(1 + nationalMonthlyRate, months) - 1)) / nationalMonthlyRate;
 
       const totalContributions = deposit + monthlyContribution * months;
-      const interestEarned = totalAmount - totalContributions;
+      const interestEarned = synchronyTotal - totalContributions;
 
       data.push({
         year,
-        totalSavings: totalAmount,
+        synchronySavings: synchronyTotal,
+        nationalSavings: nationalTotal,
         interestEarned: interestEarned,
       });
 
-      maxSavings = Math.max(maxSavings, totalAmount);
+      maxSavings = Math.max(maxSavings, synchronyTotal, nationalTotal);
     }
 
     return { data, maxSavings };
@@ -53,11 +64,12 @@ const Chart = ({ term, deposit, monthlyContribution }) => {
 
   const customTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
-      const { year, totalSavings, interestEarned } = payload[0].payload;
+      const { year, synchronySavings, nationalSavings, interestEarned } = payload[0].payload;
       return (
           <div className="custom-tooltip">
             <strong>{`Year ${year}`}</strong>
-            <div>Total Balance: {formatDollar(totalSavings)}</div>
+            <div>Synchrony Balance: {formatDollar(synchronySavings)}</div>
+            <div>National Avg Balance: {formatDollar(nationalSavings)}</div>
             <div>Interest Earned: {formatDollar(interestEarned)}</div>
           </div>
       );
@@ -101,14 +113,24 @@ const Chart = ({ term, deposit, monthlyContribution }) => {
                 label={{ value: '', angle: -90, position: 'insideLeft', offset: -10 }}
             />
 
-            {/* Line for Total Savings */}
+            {/* Line for Synchrony Savings */}
             <Line
-                key="line-totalSavings"
+                key="line-synchronySavings"
                 type="basis"
-                dataKey="totalSavings"
+                dataKey="synchronySavings"
                 stroke="#0071b9"
                 strokeWidth={3}
                 dot={renderCustomDot}
+            />
+
+            {/* Line for National Average Savings */}
+            <Line
+                key="line-nationalSavings"
+                type="basis"
+                dataKey="nationalSavings"
+                stroke="#CCCCCC"
+                strokeWidth={2}
+                strokeDasharray="5 5"
             />
 
             {/* Tooltip */}

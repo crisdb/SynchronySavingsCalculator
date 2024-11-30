@@ -37,11 +37,11 @@ const HYSComparisonView = () => {
             </button>
 
             <HYSComparison
-                rate={4.5} // Example rate value for testing
-                deposit={1000} // Example deposit value
-                interest={200} // Example interest value
-                totalSavings={1200} // Example total savings value
-                term={12} // Example term in months
+                rate={4.7}
+                deposit={1000}
+                interest={200}
+                totalSavings={1200}
+                term={12}
                 overrideFavorable={overrideFavorable}
                 isMobile={isMobile}
             />
