@@ -9,7 +9,8 @@ import '../assets/styles/HYSComparison.css';
 import { fetchRateData } from '../services/rateAPI';
 
 const HYSComparison = ({ mode = 'favorable' }) => {
-    const MAX_SAVINGS = 3000000;
+    const MAX_SAVINGS = 3000000; // Cap savings at $3 million
+    const MAX_INITIAL_DEPOSIT = 300000; // Cap initial deposit at $300,000
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const [deposit, setDeposit] = useState(10000);
     const [monthlyContribution, setMonthlyContribution] = useState(250);
@@ -44,16 +45,30 @@ const HYSComparison = ({ mode = 'favorable' }) => {
         loadRateData();
     }, []);
 
-    const calculateSavings = (deposit, monthlyContribution, term) => {
-        const monthlyRate = (apiRate / 100) / 12;
+    const calculateSavings = (deposit, monthlyContribution, term, rate) => {
+        const monthlyRate = (rate / 100) / 12;
         const months = term * 12;
+
+        // Calculate future value with monthly compounding
         const futureValue =
             deposit * Math.pow(1 + monthlyRate, months) +
             (monthlyContribution * (Math.pow(1 + monthlyRate, months) - 1)) / monthlyRate;
-        return futureValue > MAX_SAVINGS ? MAX_SAVINGS : futureValue;
+
+        // Apply the maximum savings cap
+        return Math.min(futureValue, MAX_SAVINGS);
     };
 
-    const totalSavings = calculateSavings(deposit, monthlyContribution, term);
+    // Handle capped deposit value
+    const handleDepositChange = (newValue) => {
+        setDeposit(Math.min(newValue, MAX_INITIAL_DEPOSIT));
+    };
+
+    // Calculate savings for Synchrony Bank and the general savings
+    const synchronySavings = calculateSavings(deposit, monthlyContribution, term, apiRate);
+    const totalSavings = calculateSavings(deposit, monthlyContribution, term, apiRate);
+    const totalContributions = deposit + (monthlyContribution * term * 12);
+    const interestEarned = Math.max(0, totalSavings - totalContributions);
+    const synchronyInterest = Math.max(0, synchronySavings - totalContributions);
 
     return (
         <Box sx={{ padding: 4, backgroundColor: '#FFFFFF', minHeight: '100vh' }}>
@@ -92,17 +107,17 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                         <Slider
                             value={deposit}
                             min={0}
-                            max={MAX_SAVINGS}
+                            max={MAX_INITIAL_DEPOSIT}
                             step={500}
-                            onChange={(e, newValue) => setDeposit(newValue)}
+                            onChange={(e, newValue) => handleDepositChange(newValue)}
                             aria-labelledby="deposit-slider"
                         />
                         <IncrementDecrement
                             value={deposit}
                             step={500}
                             min={0}
-                            max={MAX_SAVINGS}
-                            onChange={(newValue) => setDeposit(newValue)}
+                            max={MAX_INITIAL_DEPOSIT}
+                            onChange={(newValue) => handleDepositChange(newValue)}
                             inputType="start-saving"
                             showDollarSign={true}
                         />
@@ -153,7 +168,7 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                     <Box mt={3} width="100%">
                         <Typography className="legal-text">
                             Legal TBD: Calculator estimates are for illustrative purposes only. Account growth,
-                            interest earned and comparisons are estimates and actual savings amounts may vary.
+                            interest earned, and comparisons are estimates, and actual savings amounts may vary.
                             Source: Curinos LLC. curinos.com Although the information has been obtained from the
                             various institutions themselves, the accuracy cannot be guaranteed. See disclosures
                             below for more information.
@@ -187,8 +202,9 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                     }}
                 >
                     <RightSummary
-                        interest={Math.round(totalSavings - (deposit + monthlyContribution * term * 12)).toLocaleString()}
-                        totalContributions={Math.round(deposit + monthlyContribution * term * 12).toLocaleString()}
+                        synchronyRate={apiRate}
+                        interest={Math.round(interestEarned).toLocaleString()}
+                        totalContributions={Math.round(totalContributions).toLocaleString()}
                         totalSavings={Math.round(totalSavings).toLocaleString()}
                     />
                 </Box>

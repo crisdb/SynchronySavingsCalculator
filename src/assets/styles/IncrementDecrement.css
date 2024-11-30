@@ -84,3 +84,6 @@
     vertical-align: text-bottom;
     padding-top: 5px;
 }
+.right-summary-container h6 {
+    text-transform: uppercase;
+}
