@@ -104,14 +104,6 @@ const HYSComparison = ({ mode = 'favorable' }) => {
 
                     <Box mt={2} width="100%">
                         <Typography variant="h6">Start saving with:</Typography>
-                        <Slider
-                            value={deposit}
-                            min={0}
-                            max={MAX_INITIAL_DEPOSIT}
-                            step={500}
-                            onChange={(e, newValue) => handleDepositChange(newValue)}
-                            aria-labelledby="deposit-slider"
-                        />
                         <IncrementDecrement
                             value={deposit}
                             step={500}
@@ -121,18 +113,21 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                             inputType="start-saving"
                             showDollarSign={true}
                         />
+                        <Slider
+                            value={deposit}
+                            min={0}
+                            max={MAX_INITIAL_DEPOSIT}
+                            step={500}
+                            onChange={(e, newValue) => handleDepositChange(newValue)}
+                            aria-labelledby="deposit-slider"
+                        />
                     </Box>
+
+                    {/* Spacer */}
+                    <Box sx={{ height: '16px' }} />
 
                     <Box mt={3} width="100%">
                         <Typography variant="h6">Contribute this much monthly:</Typography>
-                        <Slider
-                            value={monthlyContribution}
-                            min={0}
-                            max={10000}
-                            step={50}
-                            onChange={(e, newValue) => setMonthlyContribution(newValue)}
-                            aria-labelledby="monthly-contribution-slider"
-                        />
                         <IncrementDecrement
                             value={monthlyContribution}
                             step={50}
@@ -142,18 +137,21 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                             inputType="monthly-contribution"
                             showDollarSign={true}
                         />
+                        <Slider
+                            value={monthlyContribution}
+                            min={0}
+                            max={10000}
+                            step={50}
+                            onChange={(e, newValue) => setMonthlyContribution(newValue)}
+                            aria-labelledby="monthly-contribution-slider"
+                        />
                     </Box>
+
+                    {/* Spacer */}
+                    <Box sx={{ height: '16px' }} />
 
                     <Box mt={3} width="100%">
                         <Typography variant="h6">Grow my savings for this long:</Typography>
-                        <Slider
-                            value={term}
-                            min={1}
-                            max={10}
-                            step={1}
-                            onChange={(e, newValue) => setTerm(newValue)}
-                            aria-labelledby="term-slider"
-                        />
                         <IncrementDecrement
                             value={term}
                             step={1}
@@ -163,22 +161,34 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                             inputType="term"
                             showDollarSign={false}
                         />
+                        <Slider
+                            value={term}
+                            min={1}
+                            max={10}
+                            step={1}
+                            onChange={(e, newValue) => setTerm(newValue)}
+                            aria-labelledby="term-slider"
+                        />
                     </Box>
+
+                    {/* Spacer */}
+                    <Box sx={{ height: '16px' }} />
 
                     <Box mt={3} width="100%">
                         <Typography className="legal-text">
-                            Legal TBD: Calculator estimates are for illustrative purposes only. Account growth,
-                            interest earned, and comparisons are estimates, and actual savings amounts may vary.
-                            Source: Curinos LLC. curinos.com Although the information has been obtained from the
-                            various institutions themselves, the accuracy cannot be guaranteed. See disclosures
-                            below for more information.
+                            Legal TBD: Calculator estimates are for illustrative purposes only.
+                            Account growth, interest earned, and comparisons are estimates, and
+                            actual savings amounts may vary. <br />
+                            Source: Curinos LLC. curinos.com Although the information has been
+                            obtained from the various institutions themselves, the accuracy
+                            cannot be guaranteed. See disclosures below for more information.
                         </Typography>
                     </Box>
                 </Box>
 
                 <Box className="chart-container" sx={{ flex: 3, paddingRight: '20px' }}>
                     <Typography sx={{ marginBottom: 2 }}>
-                        {/*Synchrony Bank ({apiRate}% APY*) vs National Average ({apiNationalRate}% APY*)*/}
+                        {/* Synchrony Bank ({apiRate}% APY*) vs National Average ({apiNationalRate}% APY*) */}
                         Your earnings with Synchrony Bank High Yield Savings
                     </Typography>
                     <Chart

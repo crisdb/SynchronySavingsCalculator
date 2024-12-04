@@ -16,3 +16,13 @@ body, h1, h2, h3, h4 {
   -moz-osx-font-smoothing: grayscale;
 
 }
+/* Legal Text Styling */
+.legal-text {
+  font-family: Synchrony, Arial, sans-serif;
+  font-size: 11pt!important;
+  line-height: 1.4;
+  color: #666666!important;
+  text-align: left;
+  padding: 0 16px;
+  max-width: 100%;
+}

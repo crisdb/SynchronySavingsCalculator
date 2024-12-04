@@ -93,13 +93,3 @@
     margin-bottom: 16px;
 }
 
-/* Legal Text Styling */
-.legal-text {
-    font-family: Synchrony, Arial, sans-serif;
-    font-size: 11pt;
-    line-height: 1.4;
-    color: #666666;
-    text-align: left;
-    padding: 0 16px;
-    max-width: 100%;
-}
