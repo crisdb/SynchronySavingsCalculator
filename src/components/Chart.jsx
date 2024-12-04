@@ -166,7 +166,7 @@ const Chart = ({ term, deposit, monthlyContribution }) => {
                 dataKey="nationalSavings"
                 stroke="#CCCCCC"
                 strokeWidth={2}
-                strokeDasharray="5 5"
+                // strokeDasharray="5 5"
             />
 
             {/* Tooltip */}
