@@ -4,8 +4,11 @@ import HYSComparisonView from './views/HYSComparisonView';
 import CDView from './views/CDView';
 import OffTermCDView from './views/OffTermCDView';
 import './assets/styles/App.css';
+import {ThemeProvider} from "@mui/material/styles";
+import theme from "./assets/styles/theme.js";
 
 const App = () => (
+    <ThemeProvider theme={theme}>
   <Router>
     <Routes>
       <Route path="/hys" element={<HYSComparisonView />} />
@@ -14,6 +17,7 @@ const App = () => (
       <Route path="*" element={<Navigate to="/hys" />} />
     </Routes>
   </Router>
+    </ThemeProvider>
 );
 
 export default App;

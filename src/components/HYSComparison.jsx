@@ -69,49 +69,38 @@ const HYSComparison = ({ mode = 'favorable' }) => {
     const totalContributions = deposit + (monthlyContribution * term * 12);
     const interestEarned = Math.max(0, totalSavings - totalContributions);
     const synchronyInterest = Math.max(0, synchronySavings - totalContributions);
-
     return (
-        <Box sx={{ padding: 4, backgroundColor: '#F8F8F9', minHeight: '100vh' }}>
+        <Box sx={{ padding: 4, backgroundColor: '#FFF', minHeight: '100vh' }}>
             <Box
                 sx={{
                     display: 'flex',
                     flexDirection: { xs: 'column', lg: 'row' },
                     justifyContent: 'space-between',
-                    alignItems: 'flex-start',
-                    gap: '20px',
+                    alignItems: { xs: 'flex-start', lg: 'stretch' }, //stretch only on large screens
+                    gap: '10px',
                     maxWidth: '1400px',
                     margin: '0 auto',
                 }}
             >
+                {/* Left Section */}
                 <Box
                     className="left-section"
                     sx={{
-                        padding: '8px 16px',
                         backgroundColor: '#F8F8F9',
                         borderRadius: '10px 0 0 10px',
-                        flex: '0 0 25%',
-                        maxWidth: '350px',
+                        flex: { xs: '1 1 auto', lg: '0 0 25%' },
+                        maxWidth: { lg: '350px' },
                         minWidth: '300px',
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        marginRight: '20px',
                     }}
                 >
                     <Typography variant="h4" sx={{ textAlign: 'center' }}>
                         I want to...
                     </Typography>
-
                     <Box mt={2} width="100%">
                         <Typography variant="h6">Start saving with:</Typography>
-                        <Slider
-                            value={deposit}
-                            min={0}
-                            max={MAX_INITIAL_DEPOSIT}
-                            step={500}
-                            onChange={(e, newValue) => handleDepositChange(newValue)}
-                            aria-labelledby="deposit-slider"
-                        />
                         <IncrementDecrement
                             value={deposit}
                             step={500}
@@ -121,18 +110,21 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                             inputType="start-saving"
                             showDollarSign={true}
                         />
+                        <Slider
+                            value={deposit}
+                            min={0}
+                            max={MAX_INITIAL_DEPOSIT}
+                            step={500}
+                            onChange={(e, newValue) => handleDepositChange(newValue)}
+                            aria-labelledby="deposit-slider"
+                            sx={{
+                                '& .MuiSlider-track': { color: '#006899' },
+                                '& .MuiSlider-rail': { color: '#CCCCCC' },
+                            }}
+                        />
                     </Box>
-
                     <Box mt={3} width="100%">
                         <Typography variant="h6">Contribute this much monthly:</Typography>
-                        <Slider
-                            value={monthlyContribution}
-                            min={0}
-                            max={10000}
-                            step={50}
-                            onChange={(e, newValue) => setMonthlyContribution(newValue)}
-                            aria-labelledby="monthly-contribution-slider"
-                        />
                         <IncrementDecrement
                             value={monthlyContribution}
                             step={50}
@@ -142,18 +134,21 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                             inputType="monthly-contribution"
                             showDollarSign={true}
                         />
+                        <Slider
+                            value={monthlyContribution}
+                            min={0}
+                            max={10000}
+                            step={50}
+                            onChange={(e, newValue) => setMonthlyContribution(newValue)}
+                            aria-labelledby="monthly-contribution-slider"
+                            sx={{
+                                '& .MuiSlider-track': { color: '#006899' },
+                                '& .MuiSlider-rail': { color: '#CCCCCC' },
+                            }}
+                        />
                     </Box>
-
                     <Box mt={3} width="100%">
                         <Typography variant="h6">Grow my savings for this long:</Typography>
-                        <Slider
-                            value={term}
-                            min={1}
-                            max={10}
-                            step={1}
-                            onChange={(e, newValue) => setTerm(newValue)}
-                            aria-labelledby="term-slider"
-                        />
                         <IncrementDecrement
                             value={term}
                             step={1}
@@ -163,55 +158,91 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                             inputType="term"
                             showDollarSign={false}
                         />
+                        <Slider
+                            value={term}
+                            min={1}
+                            max={10}
+                            step={1}
+                            onChange={(e, newValue) => setTerm(newValue)}
+                            aria-labelledby="term-slider"
+                        />
                     </Box>
-
                     <Box mt={3} width="100%">
                         <Typography className="legal-text">
-                            Legal TBD: Calculator estimates are for illustrative purposes only. Account growth,
-                            interest earned, and comparisons are estimates, and actual savings amounts may vary.
-                            Source: Curinos LLC. curinos.com Although the information has been obtained from the
-                            various institutions themselves, the accuracy cannot be guaranteed. See disclosures
-                            below for more information.
+                            Legal TBD: Calculator estimates are for illustrative purposes only.
+                            Account growth, interest earned, and comparisons are estimates, and
+                            actual savings amounts may vary. <br />
+                            Source: Curinos LLC. curinos.com Although the information has been
+                            obtained from the various institutions themselves, the accuracy cannot
+                            be guaranteed. See disclosures below for more information.
                         </Typography>
                     </Box>
                 </Box>
 
-                <Box className="chart-container" sx={{ flex: 3, paddingRight: '20px' }}>
-                    <Typography sx={{ marginBottom: 2 }}>
-                        {/*Synchrony Bank ({apiRate}% APY*) vs National Average ({apiNationalRate}% APY*)*/}
-                        Your earnings with Synchrony Bank High Yield Savings
-                    </Typography>
-                    <Chart
-                        term={term}
-                        deposit={deposit}
-                        monthlyContribution={monthlyContribution}
-                        apiRate={apiRate}
-                        apiNationalRate={apiNationalRate}
-                        maxSavings={MAX_SAVINGS}
-                    />
-                </Box>
-
+                {/* Right Section */}
                 <Box
-                    className="right-summary-container"
                     sx={{
-                        flex: 1,
                         display: 'flex',
-                        flexDirection: 'column',
-                        gap: '20px',
-                        alignItems: 'flex-start',
-                        minWidth: '250px',
+                        flexDirection: 'row',
+                        flex: 1,
+                        alignItems: 'stretch',
+                        gap: '10px',
                     }}
                 >
-                    <RightSummary
-                        synchronyRate={apiRate}
-                        interest={Math.round(interestEarned).toLocaleString()}
-                        totalContributions={Math.round(totalContributions).toLocaleString()}
-                        totalSavings={Math.round(totalSavings).toLocaleString()}
-                    />
+                    <Box
+                        className="chart-container"
+                        sx={{
+                            flex: 3,
+                            marginLeft: '8px',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'space-between',
+                            borderLeft: '2px solid white',
+
+                        }}
+                    >
+                        <Typography variant="h4" sx={{ marginBottom: 2 }}>
+                            Your earnings with Synchrony Bank High Yield Savings
+                        </Typography>
+                        <Chart
+                            term={term}
+                            deposit={deposit}
+                            monthlyContribution={monthlyContribution}
+                            apiRate={apiRate}
+                            apiNationalRate={apiNationalRate}
+                            maxSavings={MAX_SAVINGS}
+                        />
+                    </Box>
+
+                    <Box
+                        className="right-summary-container"
+                        sx={{
+                            flex: 1,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'space-between',
+                            gap: '20px',
+                            alignItems: 'flex-start',
+                            minWidth: '250px',
+                        }}
+                    >
+                        <RightSummary
+                            synchronyRate={apiRate}
+                            interest={Math.round(interestEarned).toLocaleString()}
+                            totalContributions={Math.round(totalContributions).toLocaleString()}
+                            totalSavings={Math.round(totalSavings).toLocaleString()}
+                        />
+                    </Box>
                 </Box>
             </Box>
         </Box>
     );
+
+
+
+
+
+
 };
 
 export default HYSComparison;

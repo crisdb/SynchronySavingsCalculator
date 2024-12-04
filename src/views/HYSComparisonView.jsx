@@ -16,25 +16,25 @@ const HYSComparisonView = () => {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const [mode, setMode] = useState('favorable'); // Default mode
 
-    // Track window resizing to handle mobile/desktop layout
+    // window resizing for mobile/desktop layout
     useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth <= 768);
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // Convert mode to boolean for HYSComparison
+    // C boolean for HYSComparison
     const overrideFavorable = mode === 'favorable';
 
-    // Render the HYSComparison with the appropriate props
     return (
-        <div className="hys-container" style={{ padding: '24px' }}>
-            {/*<h1>See how much your money can grow.</h1>*/}
+        <div className="hys-container" style={{padding: '24px'}}>
             <button
                 onClick={() => setMode((prev) => (prev === 'favorable' ? 'less-favorable' : 'favorable'))}
             >
                 Toggle to {mode === 'favorable' ? 'Less-Favorable' : 'Favorable'}
             </button>
+            <h1>See how much your money can grow.</h1>
+
 
             <HYSComparison
                 rate={4.7}

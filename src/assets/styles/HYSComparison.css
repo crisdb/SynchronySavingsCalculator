@@ -1,7 +1,7 @@
 .full-width-container {
     width: 100%;
     padding: 32px;
-    background-color: #F8F8F9;
+    background-color: #FFFFFF!important;
     min-height: 100vh;
 }
 
@@ -28,14 +28,13 @@
     align-items: center;
 }
 
-/* Chart Section */
 .chart-container {
     flex: 3;
-    background-color:  #F8F8F9;
-    margin-top: 32px;
+    background-color: #F8F8F9;
+    padding-top: 30px;
+    margin-right: -20px;
 }
 
-/* Right Section (Summary) */
 .right-summary-container {
     flex: 1;
     display: flex;
@@ -44,8 +43,9 @@
     align-items: flex-start;
     min-width: 250px;
     background-color: #F8F8F9;
-    padding: 16px;
+    margin: 0;
 }
+
 
 /* Increment/Decrement Component Styling */
 .increment-decrement {
@@ -93,13 +93,3 @@
     margin-bottom: 16px;
 }
 
-/* Legal Text Styling */
-.legal-text {
-    font-family: Synchrony, Arial, sans-serif;
-    font-size: 11pt;
-    line-height: 1.4;
-    color: #666666;
-    text-align: left;
-    padding: 0 16px;
-    max-width: 100%;
-}
