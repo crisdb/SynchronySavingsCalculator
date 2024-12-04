@@ -64,13 +64,49 @@ const Chart = ({ term, deposit, monthlyContribution }) => {
 
   const customTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
-      const { year, synchronySavings, nationalSavings, interestEarned } = payload[0].payload;
+      const currentYear = new Date().getFullYear();
+      const { year, synchronySavings, interestEarned } = payload[0].payload;
+
       return (
-          <div className="custom-tooltip">
-            <strong>{`Year ${year}`}</strong>
-            <div>Synchrony Balance: {formatDollar(synchronySavings)}</div>
-            <div>National Avg Balance: {formatDollar(nationalSavings)}</div>
-            <div>Interest Earned: {formatDollar(interestEarned)}</div>
+          <div style={{
+            position: 'relative',
+            background: '#ffffff',
+            borderRadius: '8px',
+            padding: '12px',
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)',
+            textAlign: 'center',
+            color: '#333',
+          }}>
+            {/* Title */}
+            <div style={{
+              fontWeight: 'bold',
+              fontSize: '16px',
+              color: '#0071b9',
+              marginBottom: '8px',
+            }}>
+              {currentYear + year}
+            </div>
+
+            {/* Details */}
+            <div style={{ fontSize: '14px', marginBottom: '4px' }}>
+              Total Balance: <strong>${synchronySavings.toLocaleString()}</strong>
+            </div>
+            <div style={{ fontSize: '14px' }}>
+              Interest Earned: <strong>${interestEarned.toLocaleString()}</strong>
+            </div>
+
+            {/* Arrow */}
+            <div style={{
+              position: 'absolute',
+              bottom: '-10px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: '0',
+              height: '0',
+              borderLeft: '8px solid transparent',
+              borderRight: '8px solid transparent',
+              borderTop: '10px solid #ffffff',
+            }} />
           </div>
       );
     }
