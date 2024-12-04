@@ -1,7 +1,7 @@
 import React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-// Create a custom theme
+
 const theme = createTheme({
     typography: {
         fontFamily: "Synchrony Sans, Arial, sans-serif",

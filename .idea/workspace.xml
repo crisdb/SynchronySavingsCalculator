@@ -5,14 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="103fc6dc-50d4-46f5-8ef3-4fd9e5fb2cdc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/assets/styles/theme.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/styles/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/styles/HYSComparison.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/HYSComparison.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/HYSComparison.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HYSComparison.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +87,7 @@
       <workItem from="1732730075317" duration="11597000" />
       <workItem from="1733170074621" duration="1037000" />
       <workItem from="1733255392103" duration="2679000" />
-      <workItem from="1733277695757" duration="4563000" />
+      <workItem from="1733277695757" duration="6146000" />
     </task>
     <servers />
   </component>

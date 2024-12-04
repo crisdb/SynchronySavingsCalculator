@@ -120,6 +120,14 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                             step={500}
                             onChange={(e, newValue) => handleDepositChange(newValue)}
                             aria-labelledby="deposit-slider"
+                            sx={{
+                                '& .MuiSlider-track': {
+                                    color: '#006899',
+                                },
+                                '& .MuiSlider-rail': {
+                                    color: '#CCCCCC',
+                                },
+                            }}
                         />
                     </Box>
 
@@ -144,6 +152,14 @@ const HYSComparison = ({ mode = 'favorable' }) => {
                             step={50}
                             onChange={(e, newValue) => setMonthlyContribution(newValue)}
                             aria-labelledby="monthly-contribution-slider"
+                            sx={{
+                                '& .MuiSlider-track': {
+                                    color: '#006899', // Blue for the left side
+                                },
+                                '& .MuiSlider-rail': {
+                                    color: '#CCCCCC', // Gray for the right side
+                                },
+                            }}
                         />
                     </Box>
 
