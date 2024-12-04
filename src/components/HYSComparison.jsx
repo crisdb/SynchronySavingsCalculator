@@ -71,7 +71,7 @@ const HYSComparison = ({ mode = 'favorable' }) => {
     const synchronyInterest = Math.max(0, synchronySavings - totalContributions);
 
     return (
-        <Box sx={{ padding: 4, backgroundColor: '#FFFFFF', minHeight: '100vh' }}>
+        <Box sx={{ padding: 4, backgroundColor: '#F8F8F9', minHeight: '100vh' }}>
             <Box
                 sx={{
                     display: 'flex',
@@ -178,7 +178,8 @@ const HYSComparison = ({ mode = 'favorable' }) => {
 
                 <Box className="chart-container" sx={{ flex: 3, paddingRight: '20px' }}>
                     <Typography sx={{ marginBottom: 2 }}>
-                        Synchrony Bank ({apiRate}% APY*) vs National Average ({apiNationalRate}% APY*)
+                        {/*Synchrony Bank ({apiRate}% APY*) vs National Average ({apiNationalRate}% APY*)*/}
+                        Your earnings with Synchrony Bank High Yield Savings
                     </Typography>
                     <Chart
                         term={term}

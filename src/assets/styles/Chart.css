@@ -19,7 +19,7 @@
     width: 426px;
     height: 12px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     margin-top: 10px;
 }
