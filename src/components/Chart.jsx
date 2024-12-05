@@ -1,8 +1,16 @@
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts';
 import '../assets/styles/Chart.css';
 
-const Chart = ({ term, deposit, monthlyContribution }) => {
+const Chart = ({ term, deposit, monthlyContribution, zoomLevel, hideNationalAverage }) => {
   const maxSavingsCap = 3000000; // Hard cap at $3 million
 
   const generateChartData = () => {
@@ -13,7 +21,6 @@ const Chart = ({ term, deposit, monthlyContribution }) => {
     let nationalTotal = deposit;
     let maxSavings = deposit;
 
-    // Add initial point at year 0
     data.push({
       year: 0,
       synchronySavings: deposit,
@@ -21,16 +28,13 @@ const Chart = ({ term, deposit, monthlyContribution }) => {
       interestEarned: 0,
     });
 
-    // Generate data points for each year
     for (let year = 1; year <= term; year++) {
       const months = year * 12;
 
-      // Calculate total savings for Synchrony Bank
       synchronyTotal =
           deposit * Math.pow(1 + synchronyMonthlyRate, months) +
           (monthlyContribution * (Math.pow(1 + synchronyMonthlyRate, months) - 1)) / synchronyMonthlyRate;
 
-      // Calculate total savings for National Average
       nationalTotal =
           deposit * Math.pow(1 + nationalMonthlyRate, months) +
           (monthlyContribution * (Math.pow(1 + nationalMonthlyRate, months) - 1)) / nationalMonthlyRate;
@@ -53,10 +57,11 @@ const Chart = ({ term, deposit, monthlyContribution }) => {
 
   const { data, maxSavings } = generateChartData();
 
-  // Dynamically adjust Y-axis max
-  const dynamicYAxisMax = Math.min(Math.ceil(maxSavings * 1.1 / 100000) * 100000, maxSavingsCap);
+  // Adjust Y-axis based on zoom level
+  const dynamicYAxisMax = zoomLevel === 'zoomed'
+      ? Math.min(Math.ceil(maxSavings * 1.05 / 100000) * 100000, 2000000) // Zoomed-in view
+      : Math.min(Math.ceil(maxSavings * 1.1 / 100000) * 100000, maxSavingsCap); // Normal view
 
-  // Generate ticks based on dynamic Y-axis max
   const tickInterval = dynamicYAxisMax / 5;
   const ticks = Array.from({ length: 6 }, (_, i) => Math.round(i * tickInterval));
 
@@ -77,7 +82,7 @@ const Chart = ({ term, deposit, monthlyContribution }) => {
             textAlign: 'center',
             color: '#333',
           }}>
-            {/* Title */}
+            {/* Tooltip Title */}
             <div style={{
               fontWeight: 'bold',
               fontSize: '16px',
@@ -87,7 +92,7 @@ const Chart = ({ term, deposit, monthlyContribution }) => {
               {currentYear + year}
             </div>
 
-            {/* Details */}
+            {/* Tooltip Details */}
             <div style={{ fontSize: '14px', marginBottom: '4px' }}>
               Total Balance: <strong>${synchronySavings.toLocaleString()}</strong>
             </div>
@@ -95,7 +100,7 @@ const Chart = ({ term, deposit, monthlyContribution }) => {
               Interest Earned: <strong>${interestEarned.toLocaleString()}</strong>
             </div>
 
-            {/* Arrow */}
+            {/* Tooltip Caret */}
             <div style={{
               position: 'absolute',
               bottom: '-10px',
@@ -112,6 +117,7 @@ const Chart = ({ term, deposit, monthlyContribution }) => {
     }
     return null;
   };
+
 
   const renderCustomDot = ({ cx, cy, index }) => (
       <circle
@@ -130,8 +136,6 @@ const Chart = ({ term, deposit, monthlyContribution }) => {
         <ResponsiveContainer width="100%" height={445}>
           <LineChart data={data} margin={{ top: 20, right: 60, left: 30, bottom: 30 }}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} />
-
-            {/* X-Axis for Years */}
             <XAxis
                 dataKey="year"
                 type="number"
@@ -140,16 +144,12 @@ const Chart = ({ term, deposit, monthlyContribution }) => {
                 interval={0}
                 label={{ value: 'Years', position: 'insideBottom', offset: -10 }}
             />
-
-            {/* Y-Axis for Total Savings */}
             <YAxis
                 domain={[0, dynamicYAxisMax]}
                 ticks={ticks}
                 tickFormatter={formatDollar}
                 label={{ value: '', angle: -90, position: 'insideLeft', offset: -10 }}
             />
-
-            {/* Line for Synchrony Savings */}
             <Line
                 key="line-synchronySavings"
                 type="basis"
@@ -158,30 +158,18 @@ const Chart = ({ term, deposit, monthlyContribution }) => {
                 strokeWidth={3}
                 dot={renderCustomDot}
             />
-
-            {/* Line for National Average Savings */}
-            <Line
-                key="line-nationalSavings"
-                type="basis"
-                dataKey="nationalSavings"
-                stroke="#CCCCCC"
-                strokeWidth={2}
-                // strokeDasharray="5 5"
-            />
-
-            {/* Tooltip */}
+            {!hideNationalAverage && (
+                <Line
+                    key="line-nationalSavings"
+                    type="basis"
+                    dataKey="nationalSavings"
+                    stroke="#CCCCCC"
+                    strokeWidth={2}
+                />
+            )}
             <Tooltip content={customTooltip} />
           </LineChart>
         </ResponsiveContainer>
-        {/* Legend */}
-        <div className="chart-legend">
-          <div className="legend-item">
-            <span className="legend-dot synchrony-dot" /> Synchrony Bank (4.65% APY*)
-          </div>
-          <div className="legend-item">
-            <span className="legend-dot national-dot" /> National Average (0.56% APY*)
-          </div>
-        </div>
       </div>
   );
 };

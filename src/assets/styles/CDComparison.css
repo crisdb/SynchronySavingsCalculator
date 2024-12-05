@@ -1,0 +1,95 @@
+.full-width-container {
+    width: 100%;
+    padding: 32px;
+    background-color: #FFFFFF!important;
+    min-height: 100vh;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Left Section (Inputs and Sliders) */
+.left-section {
+    padding: 16px;
+    background-color: #F8F8F9;
+    border-radius: 10px 0 0 10px;
+    flex: 0 0 25%;
+    max-width: 350px;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chart-container {
+    flex: 3;
+    background-color: #F8F8F9;
+    padding-top: 30px;
+    margin-right: -20px;
+}
+
+.right-summary-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+    min-width: 250px;
+    background-color: #F8F8F9;
+    margin: 0;
+}
+
+
+/* Increment/Decrement Component Styling */
+.increment-decrement {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 8px;
+    width: 100px;
+    max-width: 100px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.icon-button {
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    padding: 5px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+.icon-button .icon {
+    color: #FFFFFF;
+}
+
+.input-field {
+    border: none;
+    text-align: center;
+    font-size: 1.3rem;
+    color: #FFFFFF;
+    background-color: transparent;
+    width: 85px;
+    max-width: 180px;
+    font-weight: bold;
+}
+
+/* Slider Container */
+.slider-container {
+    width: 100%;
+    padding: 0 16px;
+    margin-bottom: 16px;
+}
+
