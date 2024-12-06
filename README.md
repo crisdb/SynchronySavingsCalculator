@@ -1,7 +1,7 @@
 
 # Synchrony Savings Calculator
 
-This project contains modular React components to render calculators for HYS, CD, and Off-Term CDs. These components are designed to be used in a CMS environment, with built-in support for:
+This project contains modular React components to render calculators for HYS, CD, These components are designed to be used in a CMS environment, with built-in support for:
 
 1. **Manual mode switching** via CMS `div` attributes.
 2. **Dynamic switching** between favorable/unfavorable based on API data.

@@ -3,80 +3,68 @@ import { Box, Typography, Slider } from '@mui/material';
 import IncrementDecrement from './IncrementDecrement';
 import RightSummary from './RightSummary';
 import Chart from './Chart';
-import '../assets/styles/App.css';
-import '../assets/styles/CDComparison.css';
+import '../assets/styles/HYSComparison.css';
 
 import { fetchRateData } from '../services/rateAPI';
 
-const CDComparison = ({ mode = 'favorable' }) => {
-    const MAX_SAVINGS = 3000000; // Cap savings at $3 million
-    const MAX_INITIAL_DEPOSIT = 300000; // Cap initial deposit at $300,000
-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-    const [deposit, setDeposit] = useState(10000);
-    const [monthlyContribution, setMonthlyContribution] = useState(250);
+const CDComparison = () => {
+    const MAX_SAVINGS = 3000000;
+    const MAX_INITIAL_DEPOSIT = 300000;
+    const [deposit, setDeposit] = useState(5000); // default starting deposit: $5,000
+    const [monthlyContribution, setMonthlyContribution] = useState(0);
     const [term, setTerm] = useState(5);
-    const [apiRate, setApiRate] = useState(4.65);
-    const [apiNationalRate, setApiNationalRate] = useState(0.56);
-    const [error, setError] = useState(null);
+    const [apiRate, setApiRate] = useState(4.85); // default CD rate
+    const [apiNationalRate, setApiNationalRate] = useState(2.34); // default national average
 
     useEffect(() => {
-        const handleResize = () => setIsMobile(window.innerWidth <= 768);
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
-    useEffect(() => {
+        // Fetch CD-specific rate data
         const loadRateData = async () => {
             try {
                 const data = await fetchRateData();
-                const product = data.productTypes.products.find(
-                    (product) => product.displayCode === 'MMA'
+                const cdProduct = data.productTypes.products.find(
+                    (product) => product.displayCode === 'CD'
                 );
-                if (product) {
-                    setApiRate(parseFloat(product.maxRate.replace('%', '')) || 4.65);
-                    setApiNationalRate(parseFloat(product.maxAPY.replace('%', '')) || 0.56);
+                if (cdProduct) {
+                    setApiRate(parseFloat(cdProduct.maxRate.replace('%', '')) || 4.85);
+                    setApiNationalRate(parseFloat(cdProduct.maxAPY.replace('%', '')) || 2.34);
                 }
             } catch (err) {
-                console.error('Error fetching rate data:', err);
-                setError('Failed to load rate data. Using defaults.');
+                console.error('Error fetching CD rate data', err);
             }
         };
 
         loadRateData();
     }, []);
 
+    // Calculate future savings
     const calculateSavings = (deposit, monthlyContribution, term, rate) => {
         const monthlyRate = (rate / 100) / 12;
         const months = term * 12;
-
-        // Calculate future value with monthly compounding
-        const futureValue =
+        return Math.min(
             deposit * Math.pow(1 + monthlyRate, months) +
-            (monthlyContribution * (Math.pow(1 + monthlyRate, months) - 1)) / monthlyRate;
-
-        // Apply the maximum savings cap
-        return Math.min(futureValue, MAX_SAVINGS);
+            (monthlyContribution * (Math.pow(1 + monthlyRate, months) - 1)) / monthlyRate,
+            MAX_SAVINGS
+        );
     };
 
-    // Handle capped deposit value
+    // Handle deposit changes with a cap
     const handleDepositChange = (newValue) => {
         setDeposit(Math.min(newValue, MAX_INITIAL_DEPOSIT));
     };
 
-    // Calculate savings for Synchrony Bank and the general savings
+    // Calculate total contributions and interest earned
     const synchronySavings = calculateSavings(deposit, monthlyContribution, term, apiRate);
-    const totalSavings = calculateSavings(deposit, monthlyContribution, term, apiRate);
-    const totalContributions = deposit + (monthlyContribution * term * 12);
-    const interestEarned = Math.max(0, totalSavings - totalContributions);
-    const synchronyInterest = Math.max(0, synchronySavings - totalContributions);
+    const totalContributions = deposit + monthlyContribution * term * 12;
+    const interestEarned = Math.max(0, synchronySavings - totalContributions);
+
     return (
-        <Box sx={{ padding: 4, backgroundColor: '#FFF', minHeight: '100vh' }}>
+        <Box sx={{ padding: 4, minHeight: '100vh' }}>
             <Box
                 sx={{
                     display: 'flex',
                     flexDirection: { xs: 'column', lg: 'row' },
                     justifyContent: 'space-between',
-                    alignItems: { xs: 'flex-start', lg: 'stretch' }, //stretch only on large screens
+                    alignItems: { xs: 'flex-start', lg: 'stretch' },
                     gap: '10px',
                     maxWidth: '1400px',
                     margin: '0 auto',
@@ -124,30 +112,6 @@ const CDComparison = ({ mode = 'favorable' }) => {
                         />
                     </Box>
                     <Box mt={3} width="100%">
-                        <Typography variant="h6">Contribute this much monthly:</Typography>
-                        <IncrementDecrement
-                            value={monthlyContribution}
-                            step={50}
-                            min={0}
-                            max={10000}
-                            onChange={(newValue) => setMonthlyContribution(newValue)}
-                            inputType="monthly-contribution"
-                            showDollarSign={true}
-                        />
-                        <Slider
-                            value={monthlyContribution}
-                            min={0}
-                            max={10000}
-                            step={50}
-                            onChange={(e, newValue) => setMonthlyContribution(newValue)}
-                            aria-labelledby="monthly-contribution-slider"
-                            sx={{
-                                '& .MuiSlider-track': { color: '#006899' },
-                                '& .MuiSlider-rail': { color: '#CCCCCC' },
-                            }}
-                        />
-                    </Box>
-                    <Box mt={3} width="100%">
                         <Typography variant="h6">Grow my savings for this long:</Typography>
                         <IncrementDecrement
                             value={term}
@@ -167,16 +131,6 @@ const CDComparison = ({ mode = 'favorable' }) => {
                             aria-labelledby="term-slider"
                         />
                     </Box>
-                    <Box mt={3} width="100%">
-                        <Typography className="legal-text">
-                            Legal TBD: Calculator estimates are for illustrative purposes only.
-                            Account growth, interest earned, and comparisons are estimates, and
-                            actual savings amounts may vary. <br />
-                            Source: Curinos LLC. curinos.com Although the information has been
-                            obtained from the various institutions themselves, the accuracy cannot
-                            be guaranteed. See disclosures below for more information.
-                        </Typography>
-                    </Box>
                 </Box>
 
                 {/* Right Section */}
@@ -194,15 +148,14 @@ const CDComparison = ({ mode = 'favorable' }) => {
                         sx={{
                             flex: 3,
                             marginLeft: '8px',
-                            display: 'flex',
+                            display: { xs: 'none', lg: 'flex' }, // hide chart on mobile (xs)
                             flexDirection: 'column',
                             justifyContent: 'space-between',
                             borderLeft: '2px solid white',
-
                         }}
                     >
                         <Typography variant="h4" sx={{ marginBottom: 2 }}>
-                            Your earnings with Synchrony Bank High Yield Savings
+                            Your earnings with Synchrony Bank CD
                         </Typography>
                         <Chart
                             term={term}
@@ -211,9 +164,10 @@ const CDComparison = ({ mode = 'favorable' }) => {
                             apiRate={apiRate}
                             apiNationalRate={apiNationalRate}
                             maxSavings={MAX_SAVINGS}
+                            yAxisRange={[5000, 7000]}
+                            xAxisLabels={[12, 24, 36, 48, 60]}
                         />
                     </Box>
-
                     <Box
                         className="right-summary-container"
                         sx={{
@@ -225,24 +179,18 @@ const CDComparison = ({ mode = 'favorable' }) => {
                             alignItems: 'flex-start',
                             minWidth: '250px',
                         }}
-                    >
-                        <RightSummary
-                            synchronyRate={apiRate}
-                            interest={Math.round(interestEarned).toLocaleString()}
-                            totalContributions={Math.round(totalContributions).toLocaleString()}
-                            totalSavings={Math.round(totalSavings).toLocaleString()}
-                        />
+                    ><RightSummary
+                        type="CD"
+                        synchronyRate={apiRate}
+                        interest={Math.round(interestEarned).toLocaleString()}
+                        totalContributions={Math.round(totalContributions).toLocaleString()}
+                        totalSavings={Math.round(synchronySavings).toLocaleString()}
+                    />
                     </Box>
                 </Box>
             </Box>
         </Box>
     );
-
-
-
-
-
-
 };
 
 export default CDComparison;

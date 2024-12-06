@@ -11,12 +11,12 @@ import {
 import '../assets/styles/Chart.css';
 
 const Chart = ({ term, deposit, monthlyContribution, zoomLevel, hideNationalAverage }) => {
-  const maxSavingsCap = 3000000; // Hard cap at $3 million
+  const maxSavingsCap = 3000000; // The absolute cap for Synchrony Bank Savings.
 
   const generateChartData = () => {
     const data = [];
-    const synchronyMonthlyRate = (4.65 / 100) / 12; // 4.65% APY
-    const nationalMonthlyRate = (0.56 / 100) / 12; // 0.56% APY
+    const synchronyMonthlyRate = (4.65 / 100) / 12;
+    const nationalMonthlyRate = (0.56 / 100) / 12;
     let synchronyTotal = deposit;
     let nationalTotal = deposit;
     let maxSavings = deposit;
@@ -57,13 +57,12 @@ const Chart = ({ term, deposit, monthlyContribution, zoomLevel, hideNationalAver
 
   const { data, maxSavings } = generateChartData();
 
-  // Adjust Y-axis based on zoom level
-  const dynamicYAxisMax = zoomLevel === 'zoomed'
-      ? Math.min(Math.ceil(maxSavings * 1.05 / 100000) * 100000, 2000000) // Zoomed-in view
-      : Math.min(Math.ceil(maxSavings * 1.1 / 100000) * 100000, maxSavingsCap); // Normal view
+  // Adjust the Y-axis dynamically based on actual max values while giving an upward trend
+  const yAxisMax = Math.min(maxSavings * 1.1, maxSavingsCap); // Add 10% padding, limited by the absolute cap
+  const yAxisMin = Math.max(0, deposit * 0.8); // Start slightly below the initial deposit for a better upward trend
 
-  const tickInterval = dynamicYAxisMax / 5;
-  const ticks = Array.from({ length: 6 }, (_, i) => Math.round(i * tickInterval));
+  const tickInterval = (yAxisMax - yAxisMin) / 5;
+  const ticks = Array.from({ length: 6 }, (_, i) => Math.round(yAxisMin + i * tickInterval));
 
   const formatDollar = (value) => `$${parseFloat(value).toLocaleString()}`;
 
@@ -82,7 +81,6 @@ const Chart = ({ term, deposit, monthlyContribution, zoomLevel, hideNationalAver
             textAlign: 'center',
             color: '#333',
           }}>
-            {/* Tooltip Title */}
             <div style={{
               fontWeight: 'bold',
               fontSize: '16px',
@@ -91,16 +89,12 @@ const Chart = ({ term, deposit, monthlyContribution, zoomLevel, hideNationalAver
             }}>
               {currentYear + year}
             </div>
-
-            {/* Tooltip Details */}
             <div style={{ fontSize: '14px', marginBottom: '4px' }}>
               Total Balance: <strong>${synchronySavings.toLocaleString()}</strong>
             </div>
             <div style={{ fontSize: '14px' }}>
               Interest Earned: <strong>${interestEarned.toLocaleString()}</strong>
             </div>
-
-            {/* Tooltip Caret */}
             <div style={{
               position: 'absolute',
               bottom: '-10px',
@@ -117,7 +111,6 @@ const Chart = ({ term, deposit, monthlyContribution, zoomLevel, hideNationalAver
     }
     return null;
   };
-
 
   const renderCustomDot = ({ cx, cy, index }) => (
       <circle
@@ -145,7 +138,7 @@ const Chart = ({ term, deposit, monthlyContribution, zoomLevel, hideNationalAver
                 label={{ value: 'Years', position: 'insideBottom', offset: -10 }}
             />
             <YAxis
-                domain={[0, dynamicYAxisMax]}
+                domain={[yAxisMin, yAxisMax]}
                 ticks={ticks}
                 tickFormatter={formatDollar}
                 label={{ value: '', angle: -90, position: 'insideLeft', offset: -10 }}
