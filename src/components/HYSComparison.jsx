@@ -18,14 +18,12 @@ const HYSComparison = () => {
     const [apiRate, setApiRate] = useState(4.65); // Default HYS rate
     const [error, setError] = useState(null);
 
-    // Handle window resizing for responsiveness
     useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth <= 768);
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // Fetch HYS rate on component mount
     useEffect(() => {
         const loadRateData = async () => {
             try {
@@ -37,7 +35,7 @@ const HYSComparison = () => {
                 setApiRate(hysRate);
             } catch (err) {
                 console.error('Error fetching rate data:', err);
-                setApiRate(3.99); // Default to unfavorable rate
+                setApiRate(3.99);
                 setError('Failed to load rate data. Using fallback defaults.');
             }
         };
@@ -45,26 +43,21 @@ const HYSComparison = () => {
         loadRateData();
     }, []);
 
-    // Savings calculation logic
     const calculateSavings = (deposit, monthlyContribution, term, rate) => {
         const monthlyRate = (rate / 100) / 12;
         const months = term * 12;
 
-        // Calculate future value with monthly compounding
         const futureValue =
             deposit * Math.pow(1 + monthlyRate, months) +
             (monthlyContribution * (Math.pow(1 + monthlyRate, months) - 1)) / monthlyRate;
 
-        // Apply the maximum savings cap
         return Math.min(futureValue, MAX_SAVINGS);
     };
 
-    // Handle capped deposit value
     const handleDepositChange = (newValue) => {
         setDeposit(Math.min(newValue, MAX_INITIAL_DEPOSIT));
     };
 
-    // Calculate values for Synchrony Bank and the general savings
     const synchronySavings = calculateSavings(deposit, monthlyContribution, term, apiRate);
     const totalSavings = calculateSavings(deposit, monthlyContribution, term, apiRate);
     const totalContributions = deposit + monthlyContribution * term * 12;
@@ -180,11 +173,11 @@ const HYSComparison = () => {
                     </Box>
                 </Box>
 
-                {/* Right Section */}
+                {/* Chart and Summary Section */}
                 <Box
                     sx={{
                         display: 'flex',
-                        flexDirection: 'row',
+                        flexDirection: { xs: 'column', lg: 'row' },
                         flex: 1,
                         alignItems: 'stretch',
                         gap: '10px',
@@ -193,7 +186,7 @@ const HYSComparison = () => {
                     <Box
                         className="chart-container"
                         sx={{
-                            flex: 3,
+                            flex: { xs: '1 1 auto', lg: 3 },
                             marginLeft: '8px',
                             display: 'flex',
                             flexDirection: 'column',
@@ -213,13 +206,12 @@ const HYSComparison = () => {
                             maxSavings={MAX_SAVINGS}
                             hideNationalAverage={apiRate < 4}
                         />
-
                     </Box>
 
                     <Box
                         className="right-summary-container"
                         sx={{
-                            flex: 1,
+                            flex: { xs: '1 1 auto', lg: 1 },
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'space-between',
