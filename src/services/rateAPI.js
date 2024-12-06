@@ -5,7 +5,7 @@ const QA_ENDPOINT = 'https://api-uat.syf.com/v1/retailBank/products?serviceLevel
 export const fetchRateData = async () => {
     try {
         const response = await axios.get(QA_ENDPOINT);
-        return response.data; // Return raw API data
+        return response.data;
     } catch (error) {
         console.error('Error fetching rate data:', error);
         throw error;

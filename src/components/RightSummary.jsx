@@ -8,7 +8,7 @@ const RightSummary = ({ synchronyRate, interest, totalContributions, totalSaving
 
             <div className="right-summary-section">
                 <Typography variant="h6">
-                    Synchrony Bank <br /> High Yield Savings
+                    Synchrony Bank CD <br />
                 </Typography>
                 <Typography className="right-summary-apr">{synchronyRate}% APY</Typography>
             </div>
@@ -19,15 +19,9 @@ const RightSummary = ({ synchronyRate, interest, totalContributions, totalSaving
             </div>
 
             <div className="right-summary-section">
-                <Typography variant="h6">Your Total Contributions</Typography>
+                <Typography variant="h6">Your Total Savings over 60 months</Typography>
                 <Typography>${totalContributions}</Typography>
             </div>
-
-            <div className="right-summary-section">
-                <Typography variant="h6">Your Total Savings<br/> Over 5 Years</Typography>
-                <Typography>${totalSavings}</Typography>
-            </div>
-
             <div className="right-summary-highlight">
                 <Typography className="highlight-text">
                     <span className="highlight-earn">Earn</span>{' '}
