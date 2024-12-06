@@ -192,7 +192,7 @@ const HYSComparison = () => {
                         sx={{
                             flex: { xs: '1 1 auto', lg: 3 },
                             marginLeft: '8px',
-                            display: 'flex',
+                            display: { xs: 'none', lg: 'flex' },
                             flexDirection: 'column',
                             justifyContent: 'space-between',
                             borderLeft: '2px solid white',

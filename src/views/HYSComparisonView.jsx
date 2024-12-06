@@ -40,13 +40,13 @@ const HYSComparisonView = () => {
     };
 
     return (
-        <div className="hys-container" style={{padding: '24px'}}>
-            {/* Toggle button for demo purposes, only visible in development */}
-            {process.env.NODE_ENV === 'development' && (
-                <button onClick={toggleMode}>
-                    {mode === 'favorable' ? 'Switch to Unfavorable (Demo)' : 'Switch to Favorable (Demo)'}
-                </button>
-            )}
+        <div className="hys-container" style={{padding: '10px'}}>
+            {/*/!* Toggle button for demo purposes, only visible in development *!/*/}
+            {/*{process.env.NODE_ENV === 'development' && (*/}
+            {/*    <button onClick={toggleMode}>*/}
+            {/*        {mode === 'favorable' ? 'Switch to Unfavorable (Demo)' : 'Switch to Favorable (Demo)'}*/}
+            {/*    </button>*/}
+            {/*)}*/}
             <h1>See how much your money can grow.</h1>
 
             {mode && (
