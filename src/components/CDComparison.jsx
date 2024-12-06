@@ -3,17 +3,17 @@ import { Box, Typography, Slider } from '@mui/material';
 import IncrementDecrement from './IncrementDecrement';
 import RightSummary from './RightSummary';
 import Chart from './Chart';
-import '../assets/styles/HYSComparison.css'; // Shared CSS for layout and styling
+import '../assets/styles/HYSComparison.css';
 
 import { fetchRateData } from '../services/rateAPI';
 
 const CDComparison = () => {
-    const MAX_SAVINGS = 3000000; // Cap savings at $3 million
-    const MAX_INITIAL_DEPOSIT = 300000; // Cap initial deposit at $300,000
+    const MAX_SAVINGS = 3000000;
+    const MAX_INITIAL_DEPOSIT = 300000;
     const [deposit, setDeposit] = useState(5000); // Default starting deposit: $5,000
-    const [monthlyContribution, setMonthlyContribution] = useState(0); // No monthly contributions
-    const [term, setTerm] = useState(5); // Default term of 60 months (5 years)
-    const [apiRate, setApiRate] = useState(4.85); // Default CD rate
+    const [monthlyContribution, setMonthlyContribution] = useState(0);
+    const [term, setTerm] = useState(5);
+    const [apiRate, setApiRate] = useState(4.85); // default CD rate
     const [apiNationalRate, setApiNationalRate] = useState(2.34); // Default national average for CDs
 
     useEffect(() => {
@@ -148,7 +148,7 @@ const CDComparison = () => {
                         sx={{
                             flex: 3,
                             marginLeft: '8px',
-                            display: 'flex',
+                            display: { xs: 'none', lg: 'flex' }, // Hide chart on mobile (xs)
                             flexDirection: 'column',
                             justifyContent: 'space-between',
                             borderLeft: '2px solid white',
