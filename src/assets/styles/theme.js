@@ -15,8 +15,10 @@ const theme = createTheme({
             fontSize: '1.26rem',
             fontWeight: 500,
             lineHeight: 1.5,
+            [`@media (max-width:768px)`]: {
+                fontSize: '1.2rem',
+            },
         },
     },
 });
-
 export default theme;

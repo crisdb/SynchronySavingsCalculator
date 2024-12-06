@@ -40,7 +40,7 @@ const HYSComparisonView = () => {
     };
 
     return (
-        <div className="hys-container" style={{ padding: '24px' }}>
+        <div className="hys-container" style={{padding: '24px'}}>
             {/* Toggle button for demo purposes, only visible in development */}
             {process.env.NODE_ENV === 'development' && (
                 <button onClick={toggleMode}>
@@ -49,7 +49,6 @@ const HYSComparisonView = () => {
             )}
             <h1>See how much your money can grow.</h1>
 
-            {/* Render the HYSComparison component only when mode is determined */}
             {mode && (
                 <HYSComparison
                     rate={rate}

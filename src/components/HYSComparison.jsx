@@ -64,7 +64,7 @@ const HYSComparison = () => {
     const interestEarned = Math.max(0, totalSavings - totalContributions);
 
     return (
-        <Box sx={{ padding: 4, backgroundColor: '#FFF', minHeight: '100vh' }}>
+        <Box sx={{ padding: 4, minHeight: '100vh' }}>
             <Box
                 sx={{
                     display: 'flex',
@@ -72,6 +72,7 @@ const HYSComparison = () => {
                     justifyContent: 'space-between',
                     alignItems: { xs: 'flex-start', lg: 'stretch' },
                     gap: '10px',
+                    backgroundColor: { xs: '#F8F8F9', lg: '#FFF' },
                     maxWidth: '1400px',
                     margin: '0 auto',
                 }}
@@ -82,17 +83,20 @@ const HYSComparison = () => {
                     sx={{
                         backgroundColor: '#F8F8F9',
                         borderRadius: '10px 0 0 10px',
-                        flex: { xs: '1 1 auto', lg: '0 0 25%' },
-                        maxWidth: { lg: '350px' },
+                        flex: {xs: '1 1 auto', lg: '0 0 25%'},
+                        maxWidth: {lg: '350px'},
                         minWidth: '300px',
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
                     }}
                 >
-                    <Typography variant="h4" sx={{ textAlign: 'center' }}>
+                    <h5> Calculate your savings. </h5>
+
+                    <Typography variant="h4" sx={{textAlign: 'center'}}>
                         I want to...
                     </Typography>
+
                     <Box mt={2} width="100%">
                         <Typography variant="h6">Start saving with:</Typography>
                         <IncrementDecrement
@@ -112,8 +116,8 @@ const HYSComparison = () => {
                             onChange={(e, newValue) => handleDepositChange(newValue)}
                             aria-labelledby="deposit-slider"
                             sx={{
-                                '& .MuiSlider-track': { color: '#006899' },
-                                '& .MuiSlider-rail': { color: '#CCCCCC' },
+                                '& .MuiSlider-track': {color: '#006899'},
+                                '& .MuiSlider-rail': {color: '#CCCCCC'},
                             }}
                         />
                     </Box>
@@ -136,8 +140,8 @@ const HYSComparison = () => {
                             onChange={(e, newValue) => setMonthlyContribution(newValue)}
                             aria-labelledby="monthly-contribution-slider"
                             sx={{
-                                '& .MuiSlider-track': { color: '#006899' },
-                                '& .MuiSlider-rail': { color: '#CCCCCC' },
+                                '& .MuiSlider-track': {color: '#006899'},
+                                '& .MuiSlider-rail': {color: '#CCCCCC'},
                             }}
                         />
                     </Box>
@@ -165,7 +169,7 @@ const HYSComparison = () => {
                         <Typography className="legal-text">
                             Legal TBD: Calculator estimates are for illustrative purposes only.
                             Account growth, interest earned, and comparisons are estimates, and
-                            actual savings amounts may vary. <br />
+                            actual savings amounts may vary. <br/>
                             Source: Curinos LLC. curinos.com Although the information has been
                             obtained from the various institutions themselves, the accuracy cannot
                             be guaranteed. See disclosures below for more information.

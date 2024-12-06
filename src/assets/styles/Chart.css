@@ -2,6 +2,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .recharts-responsive-container {
+        width: 450px !important;
+    }
 }
 
 
@@ -47,7 +54,4 @@
 .national-dot {
     background-color: #9B9B9B;
     border: 2px solid #FFFFFF;
-}
-.recharts-responsive-container{
-    width: 550px!important;
 }
